@@ -61,4 +61,4 @@ header:
     - '**/Dockerfile'
     - '**/.dockerignore'
   comment: never
-  license-location-threshold: 80
+  license-location-threshold: 100
