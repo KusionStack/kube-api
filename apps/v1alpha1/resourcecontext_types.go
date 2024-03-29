@@ -30,6 +30,7 @@ type ContextDetail struct {
 	Data map[string]string `json:"data,omitempty"`
 }
 
+// +genclient
 //+kubebuilder:object:root=true
 
 // ResourceContext is the Schema for the resourcecontext API
