@@ -27,3 +27,9 @@ const (
 	AnnotationPodSkipRuleConditions         = "podtransitionrule.kusionstack.io/skip-rule-conditions"
 	AnnotationPodTransitionRuleDetailPrefix = "detail.podtransitionrule.kusionstack.io"
 )
+
+// PodDecoration Annotation
+const (
+	// AnnotationPodDecorationRevision struct: { groupName: {name: pdName, revision: currentRevision}, groupName: {} }
+	AnnotationPodDecorationRevision = "poddecoration.kusionstack.io/revisions"
+)
