@@ -50,7 +50,7 @@ type PodUpdateStrategyType string
 
 const (
 	// CollaSetRecreatePodUpdateStrategyType indicates that CollaSet will always update Pod by deleting and recreate it.
-	CollaSetRecreatePodUpdateStrategyType PodUpdateStrategyType = "ReCreate"
+	CollaSetRecreatePodUpdateStrategyType PodUpdateStrategyType = "Recreate"
 	// CollaSetInPlaceIfPossiblePodUpdateStrategyType indicates thath CollaSet will try to update Pod by in-place update
 	// when it is possible. Recently, only Pod image can be updated in-place. Any other Pod spec change will make the
 	// policy fall back to CollaSetRecreatePodUpdateStrategyType.
@@ -58,6 +58,9 @@ const (
 	// CollaSetInPlaceOnlyPodUpdateStrategyType indicates that CollaSet will always update Pod in-place, instead of
 	// recreating pod. It will encounter an error on original Kubernetes cluster.
 	CollaSetInPlaceOnlyPodUpdateStrategyType PodUpdateStrategyType = "InPlaceOnly"
+	// CollaSetReplacePodUpdateStrategyType indicates that CollaSet will always update Pod by replace, it will
+	// create a new Pod and delete the old pod when the new one service available.
+	CollaSetReplacePodUpdateStrategyType PodUpdateStrategyType = "Replace"
 )
 
 // CollaSetSpec defines the desired state of CollaSet
@@ -125,6 +128,10 @@ type ScaleStrategy struct {
 	// +optional
 	PodToInclude []string `json:"podToInclude,omitempty"`
 
+	// PodToDelete indicates the pods which will be deleted by CollaSet.
+	// +optional
+	PodToDelete []string `json:"podToDelete,omitempty"`
+
 	// PersistentVolumeClaimRetentionPolicy describes the lifecycle of PersistentVolumeClaim
 	// created from volumeClaimTemplates. By default, all persistent volume claims are created as needed and
 	// deleted after no pod is using them. This policy allows the lifecycle to be altered, for example
@@ -155,7 +162,7 @@ type PersistentVolumeClaimRetentionPolicy struct {
 }
 
 type ByPartition struct {
-	// Partition controls the update progress by indicating how many pods should be updated.
+	// Partition controls the number of pods in old revisions.
 	// Defaults to nil (all pods will be updated)
 	// +optional
 	Partition *int32 `json:"partition,omitempty"`
