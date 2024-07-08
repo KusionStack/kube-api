@@ -24,6 +24,13 @@ const (
 // well known finalizer
 const (
 	PodOperationProtectionFinalizerPrefix = "prot.podopslifecycle.kusionstack.io"
+	ProtectFinalizer                      = "finalizer.operating.kusionstack.io/protected"
+)
+
+// well known event reasons
+const (
+	PodDeletionEvent  = "PodDeletion"
+	ServiceReadyEvent = "ServiceReady"
 )
 
 // well known variables
