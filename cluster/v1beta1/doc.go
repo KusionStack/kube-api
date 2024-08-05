@@ -21,4 +21,4 @@ limitations under the License.
 // +groupName=cluster.karbour.com
 
 // Package v1beta1 Package v1beta1 is the v1beta1 version of the API.
-package v1beta1 // import "github.com/KusionStack/karbour/pkg/kubernetes/apis/cluster/v1beta1"
+package v1beta1
