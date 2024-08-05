@@ -262,7 +262,6 @@ type PodDecorationCondition struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:shortName=pd
-// +kubebuilder:printcolumn:name="EFFECTIVE",type="boolean",JSONPath=".status.isEffective",description="The number of pods updated."
 // +kubebuilder:printcolumn:name="MATCHED",type="integer",JSONPath=".status.matchedPods",description="The number of selected pods."
 // +kubebuilder:printcolumn:name="INJECTED",type="integer",JSONPath=".status.injectedPods",description="The number of injected pods."
 // +kubebuilder:printcolumn:name="UPDATED",type="integer",JSONPath=".status.updatedPods",description="The number of updated pods."
