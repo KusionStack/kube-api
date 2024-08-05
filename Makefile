@@ -19,7 +19,7 @@ manifests: controller-gen
 generate: codegen controller-gen ## Generate code containing DeepCopy, DeepCopyInto, and DeepCopyObject method implementations.
 	#@scripts/generate_client.sh
 	# $(CONTROLLER_GEN) object:headerFile="hack/boilerplate.go.txt" paths="./..."
-	$(CODEGEN) code-gen --go-header-file=./hack/boilerplate.go.txt --code-generator-version=v0.27.16 --apis-path=./ --generators=deepcopy,register,defaulter
+	$(CODEGEN) code-gen --go-header-file=./hack/boilerplate.go.txt --code-generator-version=v0.27.16 --apis-path=./ --generators=deepcopy,register
 
 codegen: $(CODEGEN) # Download kube-codegen locally if necessary. If wrong version is installed, it will be overwritten.
 $(CODEGEN):
