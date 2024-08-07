@@ -85,7 +85,6 @@ type PodDecorationPodTemplate struct {
 }
 
 type PodDecorationPodTemplateMeta struct {
-
 	// patch pod metadata policy, Default is "Retain"
 	PatchPolicy MetadataPatchPolicy `json:"patchPolicy"`
 
@@ -257,15 +256,12 @@ type PodDecorationCondition struct {
 	Message string `json:"message,omitempty"`
 }
 
+// +k8s:openapi-gen=true
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-
-// PodDecoration is the Schema for the poddecorations API
-// +k8s:openapi-gen=true
-// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// +kubebuilder:resource:shortName=pd
+// +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:printcolumn:name="EFFECTIVE",type="boolean",JSONPath=".status.isEffective",description="The number of pods updated."
+// +kubebuilder:resource:shortName=pd
 // +kubebuilder:printcolumn:name="MATCHED",type="integer",JSONPath=".status.matchedPods",description="The number of selected pods."
 // +kubebuilder:printcolumn:name="INJECTED",type="integer",JSONPath=".status.injectedPods",description="The number of injected pods."
 // +kubebuilder:printcolumn:name="UPDATED",type="integer",JSONPath=".status.updatedPods",description="The number of updated pods."
@@ -274,6 +270,8 @@ type PodDecorationCondition struct {
 // +kubebuilder:printcolumn:name="UPDATED_REVISION",type="string",JSONPath=".status.updatedRevision",description="The updated revision."
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +resource:path=poddecorations
+
+// PodDecoration is the Schema for the poddecorations API
 type PodDecoration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -282,6 +280,7 @@ type PodDecoration struct {
 	Status PodDecorationStatus `json:"status,omitempty"`
 }
 
+// +kubebuilder:object:root=true
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // PodDecorationList contains a list of PodDecoration
@@ -289,8 +288,4 @@ type PodDecorationList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []PodDecoration `json:"items"`
-}
-
-func init() {
-	SchemeBuilder.Register(&PodDecoration{}, &PodDecorationList{})
 }

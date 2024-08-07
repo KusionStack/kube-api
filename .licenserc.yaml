@@ -60,5 +60,5 @@ header:
     - '**/PROJECT'
     - '**/Dockerfile'
     - '**/.dockerignore'
-  comment: never
-  license-location-threshold: 100
+  comment: on-failure
+  license-location-threshold: 200

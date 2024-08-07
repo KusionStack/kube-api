@@ -30,12 +30,12 @@ type ContextDetail struct {
 	Data map[string]string `json:"data,omitempty"`
 }
 
-//+kubebuilder:object:root=true
-
-// ResourceContext is the Schema for the resourcecontext API
 // +k8s:openapi-gen=true
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +kubebuilder:object:root=true
 // +kubebuilder:resource:shortName=rc
+
+// ResourceContext is the Schema for the resourcecontext API
 type ResourceContext struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -44,16 +44,13 @@ type ResourceContext struct {
 }
 
 // +kubebuilder:object:root=true
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // ResourceContextList contains a list of ResourceContext
 type ResourceContextList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []ResourceContext `json:"items"`
-}
-
-func init() {
-	SchemeBuilder.Register(&ResourceContext{}, &ResourceContextList{})
 }
 
 // Contains is used to check whether the key-value pair in contained in Data.

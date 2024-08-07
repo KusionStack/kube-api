@@ -168,8 +168,7 @@ type ByPartition struct {
 	Partition *int32 `json:"partition,omitempty"`
 }
 
-type ByLabel struct {
-}
+type ByLabel struct{}
 
 // RollingUpdateCollaSetStrategy is used to communicate parameter for rolling update.
 type RollingUpdateCollaSetStrategy struct {
@@ -272,12 +271,10 @@ type CollaSetCondition struct {
 	Message string `json:"message,omitempty"`
 }
 
-// +kubebuilder:object:root=true
-// +kubebuilder:subresource:status
-
-// CollaSet is the Schema for the collasets API
 // +k8s:openapi-gen=true
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +kubebuilder:object:root=true
 // +kubebuilder:resource:shortName=cls
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="DESIRED",type="integer",JSONPath=".spec.replicas",description="The desired number of pods."
@@ -290,6 +287,8 @@ type CollaSetCondition struct {
 // +kubebuilder:printcolumn:name="UPDATED_REVISION",type="string",JSONPath=".status.updatedRevision",description="The updated revision."
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +resource:path=collasets
+
+// CollaSet is the Schema for the collasets API
 type CollaSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -298,15 +297,12 @@ type CollaSet struct {
 	Status CollaSetStatus `json:"status,omitempty"`
 }
 
-//+kubebuilder:object:root=true
+// +kubebuilder:object:root=true
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // CollaSetList contains a list of CollaSet
 type CollaSetList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []CollaSet `json:"items"`
-}
-
-func init() {
-	SchemeBuilder.Register(&CollaSet{}, &CollaSetList{})
 }

@@ -135,11 +135,10 @@ type OpsStatus struct {
 	Message string `json:"message,omitempty"`
 }
 
-// +kubebuilder:object:root=true
-// +kubebuilder:subresource:status
-
 // +k8s:openapi-gen=true
+// +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +kubebuilder:object:root=true
 // +kubebuilder:resource:shortName=oj
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="PROGRESS",type="string",JSONPath=".status.progress"
@@ -154,15 +153,12 @@ type OperationJob struct {
 	Status OperationJobStatus `json:"status,omitempty"`
 }
 
-//+kubebuilder:object:root=true
+// +kubebuilder:object:root=true
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // OperationJobList contains a list of OperationJob
 type OperationJobList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []OperationJob `json:"items"`
-}
-
-func init() {
-	SchemeBuilder.Register(&OperationJob{}, &OperationJobList{})
 }
