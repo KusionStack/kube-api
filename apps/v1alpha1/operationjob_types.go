@@ -140,7 +140,7 @@ type OpsStatus struct {
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:object:root=true
-// +kubebuilder:resource:shortName=oj
+// +kubebuilder:resource:shortName=opj
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="PROGRESS",type="string",JSONPath=".status.progress"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
