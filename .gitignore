@@ -30,7 +30,7 @@ vendor/
 go.work
 go.work.sum
 
-<<<<<<< HEAD
 __output
-=======
->>>>>>> 5eff7c8 (add generated clientset for kube-api resources)
+
+# Other unused file
+.DS_Store

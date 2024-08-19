@@ -26,6 +26,7 @@ import (
 type AppsV1alpha1Interface interface {
 	RESTClient() rest.Interface
 	CollaSetsGetter
+	PodDecorationsGetter
 	PodTransitionRulesGetter
 	ResourceContextsGetter
 }
@@ -37,6 +38,10 @@ type AppsV1alpha1Client struct {
 
 func (c *AppsV1alpha1Client) CollaSets(namespace string) CollaSetInterface {
 	return newCollaSets(c, namespace)
+}
+
+func (c *AppsV1alpha1Client) PodDecorations(namespace string) PodDecorationInterface {
+	return newPodDecorations(c, namespace)
 }
 
 func (c *AppsV1alpha1Client) PodTransitionRules(namespace string) PodTransitionRuleInterface {
