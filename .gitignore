@@ -31,3 +31,6 @@ go.work
 go.work.sum
 
 __output
+
+# Other unused file
+.DS_Store

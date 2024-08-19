@@ -19,6 +19,8 @@ package v1alpha1
 
 type CollaSetExpansion interface{}
 
+type PodDecorationExpansion interface{}
+
 type PodTransitionRuleExpansion interface{}
 
 type ResourceContextExpansion interface{}
