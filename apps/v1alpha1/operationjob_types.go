@@ -138,8 +138,6 @@ type OpsStatus struct {
 }
 
 type CodeReasonMessage struct {
-	// Code is a globally unique identifier
-	Code string `json:"code,omitempty"`
 	// A human-readable short word
 	// +optional
 	Reason string `json:"reason,omitempty"`
@@ -150,7 +148,7 @@ type CodeReasonMessage struct {
 
 // Error implements error.
 func (c *CodeReasonMessage) Error() string {
-	return fmt.Sprintf("err: code=%q, reason=%q, message=%q", c.Code, c.Reason, c.Message)
+	return fmt.Sprintf("err: reason=%q, message=%q", c.Reason, c.Message)
 }
 
 // +k8s:openapi-gen=true
