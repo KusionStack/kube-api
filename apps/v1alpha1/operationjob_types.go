@@ -30,7 +30,6 @@ const (
 const (
 	ReasonPodNotFound       = "PodNotFound"
 	ReasonContainerNotFound = "ContainerNotFound"
-	ReasonReplacedByNewPod  = "ReplacedByNewPod"
 )
 
 // OperationProgress indicates operation progress of pod
@@ -134,10 +133,10 @@ type OpsStatus struct {
 
 	// error indicates the error info of progressing
 	// +optional
-	Error *CodeReasonMessage `json:"error,omitempty"`
+	Error *ErrorReasonMessage `json:"error,omitempty"`
 }
 
-type CodeReasonMessage struct {
+type ErrorReasonMessage struct {
 	// A human-readable short word
 	// +optional
 	Reason string `json:"reason,omitempty"`
@@ -147,7 +146,7 @@ type CodeReasonMessage struct {
 }
 
 // Error implements error.
-func (c *CodeReasonMessage) Error() string {
+func (c *ErrorReasonMessage) Error() string {
 	return fmt.Sprintf("err: reason=%q, message=%q", c.Reason, c.Message)
 }
 
