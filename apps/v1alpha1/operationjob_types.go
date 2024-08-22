@@ -32,6 +32,10 @@ const (
 	ReasonContainerNotFound = "ContainerNotFound"
 )
 
+const (
+	ExtraInfoReplacedNewPodKey = "NewPod"
+)
+
 // OperationProgress indicates operation progress of pod
 type OperationProgress string
 
