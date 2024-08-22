@@ -17,6 +17,8 @@ limitations under the License.
 package v1alpha1
 
 import (
+	"fmt"
+
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -35,11 +37,10 @@ const (
 type OperationProgress string
 
 const (
-	OperationProgressPending               OperationProgress = "Pending"
-	OperationProgressProcessing            OperationProgress = "Processing"
-	OperationProgressFinishingOpsLifecycle OperationProgress = "FinishingOpsLifecycle"
-	OperationProgressFailed                OperationProgress = "Failed"
-	OperationProgressSucceeded             OperationProgress = "Succeeded"
+	OperationProgressPending    OperationProgress = "Pending"
+	OperationProgressProcessing OperationProgress = "Processing"
+	OperationProgressFailed     OperationProgress = "Failed"
+	OperationProgressSucceeded  OperationProgress = "Succeeded"
 )
 
 // OperationJobSpec defines the desired state of OperationJob
@@ -127,13 +128,27 @@ type OpsStatus struct {
 	// +optional
 	Progress OperationProgress `json:"progress,omitempty"`
 
-	// reason for current operation progress
+	// extra info of the target operating progress
+	// +optional
+	ExtraInfo map[string]string `json:"extraInfo,omitempty"`
+
+	// error indicates the error info of progressing
+	// +optional
+	Error *CodeReasonMessage `json:"error,omitempty"`
+}
+
+type CodeReasonMessage struct {
+	// A human-readable short word
 	// +optional
 	Reason string `json:"reason,omitempty"`
-
-	// message displays detail of reason
+	// A human-readable message indicating details about the transition.
 	// +optional
 	Message string `json:"message,omitempty"`
+}
+
+// Error implements error.
+func (c *CodeReasonMessage) Error() string {
+	return fmt.Sprintf("err: reason=%q, message=%q", c.Reason, c.Message)
 }
 
 // +k8s:openapi-gen=true
