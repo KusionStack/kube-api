@@ -30,6 +30,7 @@ type ContextDetail struct {
 	Data map[string]string `json:"data,omitempty"`
 }
 
+// +genclient
 // +k8s:openapi-gen=true
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:object:root=true
