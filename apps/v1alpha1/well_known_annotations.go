@@ -20,8 +20,6 @@ const (
 	PodAvailableConditionsAnnotation = "pod.kusionstack.io/available-conditions" // indicate the available conditions of a pod
 
 	LastPodStatusAnnotationKey = "collaset.kusionstack.io/last-pod-status"
-
-	AnnotationPodOrphanedBy = "collaset.kusionstack.io/orphaned-by"
 )
 
 // PodTransitionRule Annotation
