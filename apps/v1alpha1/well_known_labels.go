@@ -54,8 +54,9 @@ var (
 
 // CollaSet labels
 const (
-	PodInstanceIDLabelKey          = "collaset.kusionstack.io/instance-id"     // used to attach Pod instance ID on Pod
-	CollaSetUpdateIndicateLabelKey = "collaset.kusionstack.io/update-included" // used to indicate a pod should be updated by label
+	PodInstanceIDLabelKey          = "collaset.kusionstack.io/instance-id"           // used to attach Pod instance ID on Pod
+	CollaSetUpdateIndicateLabelKey = "collaset.kusionstack.io/update-included"       // used to indicate a pod should be updated by label
+	PodUpgradeByRecreateLabelKey   = "collaset.kusionstack.io/upgrade-by-recreating" // used to indicate a pod is upgraded by recreate
 
 	PodReplacePairOriginName = "collaset.kusionstack.io/replace-pair-origin-name" // used to indicate the original Pod name for replacement.
 	PodReplacePairNewId      = "collaset.kusionstack.io/replace-pair-new-id"      // used to indicate the new created Pod instance ID for replacement.
