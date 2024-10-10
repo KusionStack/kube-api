@@ -99,11 +99,11 @@ type OperationJobStatus struct {
 
 	// Operation start time
 	// +optional
-	StartTimestamp *metav1.Time `json:"startTimestamp,omitempty"`
+	StartTime *metav1.Time `json:"startTime,omitempty"`
 
 	// Operation end time
 	// +optional
-	EndTimestamp *metav1.Time `json:"endTimestamp,omitempty"`
+	EndTime *metav1.Time `json:"endTime,omitempty"`
 
 	// Replicas of the pods involved in the OperationJob
 	// +optional
@@ -133,7 +133,11 @@ type OpsStatus struct {
 
 	// target operation start time
 	// +optional
-	StartTimestamp *metav1.Time `json:"startTimestamp,omitempty"`
+	StartTime *metav1.Time `json:"startTime,omitempty"`
+
+	// target operation end time
+	// +optional
+	EndTime *metav1.Time `json:"endTime,omitempty"`
 
 	// extra info of the target operating progress
 	// +optional
