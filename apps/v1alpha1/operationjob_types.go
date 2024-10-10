@@ -66,7 +66,7 @@ type OperationJobSpec struct {
 	OperationDelaySeconds *int32 `json:"operationDelaySeconds,omitempty"`
 
 	// Specify the duration in seconds relative to the startTime
-	// that the job may be active before the system tries to terminate it
+	// that the target may be active before the system tries to terminate it
 	// +optional
 	ActiveDeadlineSeconds *int32 `json:"activeDeadlineSeconds,omitempty"`
 
@@ -99,11 +99,11 @@ type OperationJobStatus struct {
 
 	// Operation start time
 	// +optional
-	StartTimestamp *metav1.Time `json:"startTimestamp,omitempty"`
+	StartTime *metav1.Time `json:"startTime,omitempty"`
 
 	// Operation end time
 	// +optional
-	EndTimestamp *metav1.Time `json:"endTimestamp,omitempty"`
+	EndTime *metav1.Time `json:"endTime,omitempty"`
 
 	// Replicas of the pods involved in the OperationJob
 	// +optional
@@ -130,6 +130,14 @@ type OpsStatus struct {
 	// operation progress of target pod
 	// +optional
 	Progress OperationProgress `json:"progress,omitempty"`
+
+	// target operation start time
+	// +optional
+	StartTime *metav1.Time `json:"startTime,omitempty"`
+
+	// target operation end time
+	// +optional
+	EndTime *metav1.Time `json:"endTime,omitempty"`
 
 	// extra info of the target operating progress
 	// +optional
