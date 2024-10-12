@@ -65,7 +65,7 @@ var (
 
 // CollaSet labels
 const (
-	// PodInstanceIDLabelKey is used to attach Pod instance ID on Pod
+	// PodInstanceIDLabelKey is used to attach pod instance ID on pod
 	PodInstanceIDLabelKey = "collaset.kusionstack.io/instance-id"
 	// CollaSetUpdateIndicateLabelKey is used to indicate a pod should be updated by label
 	CollaSetUpdateIndicateLabelKey = "collaset.kusionstack.io/update-included"
@@ -76,14 +76,12 @@ const (
 	PodReplaceIndicationLabelKey = "collaset.kusionstack.io/to-replace"
 	// PodReplaceByReplaceUpdateLabelKey indicates a pod is replaced by update by collaset
 	PodReplaceByReplaceUpdateLabelKey = "collaset.kusionstack.io/replaced-by-replace-update"
-	// PodIgnoringIndicationLabelKey indicates a pod to be ignored by collaset. For example,
-	// a Pod is stuck to delete when it is on a failed node or its network communication to
-	// the outside world is completely cut, then the Pod can be ignored by CollaSet.
-	PodIgnoringIndicationLabelKey = "collaset.kusionstack.io/to-ignore"
+	// PodExcludeIndicationLabelKey indicates a pod will be excluded by collaset
+	PodExcludeIndicationLabelKey = "collaset.kusionstack.io/to-exclude"
 
-	// PodReplacePairOriginName is used to indicate replace origin Pod name on the new created Pod
+	// PodReplacePairOriginName is used to indicate replace origin pod name on the new created pod
 	PodReplacePairOriginName = "collaset.kusionstack.io/replace-pair-origin-name"
-	// PodReplacePairNewId is used to indicate the new created Pod instance on the replace origin Pod
+	// PodReplacePairNewId is used to indicate the new created pod instance on replace origin pod
 	PodReplacePairNewId = "collaset.kusionstack.io/replace-pair-new-id"
 
 	// PvcTemplateHashLabelKey is used to attach hash of pvc template to pvc resource
