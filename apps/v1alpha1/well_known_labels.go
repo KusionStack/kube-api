@@ -86,6 +86,9 @@ const (
 
 	// PvcTemplateHashLabelKey is used to attach hash of pvc template to pvc resource
 	PvcTemplateHashLabelKey = "collaset.kusionstack.io/pvc-template-hash"
+
+	// PodOrphanedIndicateLabelKey indicates pod or pvc is orphaned
+	PodOrphanedIndicateLabelKey = "collaset.kusionstack.io/orphaned"
 )
 
 // PodDecoration labels
