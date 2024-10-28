@@ -52,6 +52,13 @@ const (
 
 	// PodServiceAvailableLabel indicates a pod is available to serve
 	PodServiceAvailableLabel = "podopslifecycle.kusionstack.io/service-available"
+	PodPreCheckLabel         = "podopslifecycle.kusionstack.io/pre-checking"
+	PodPreparingLabel        = "podopslifecycle.kusionstack.io/preparing"
+	PodOperatingLabel        = "podopslifecycle.kusionstack.io/operating"
+	PodPostCheckLabel        = "podopslifecycle.kusionstack.io/post-checking"
+	PodCompletingLabel       = "podopslifecycle.kusionstack.io/completing"
+	PodCreatingLabel         = "podopslifecycle.kusionstack.io/creating"
+
 	// PodStayOfflineLabel indicates a pod is not ready and available to serve
 	PodStayOfflineLabel     = "podopslifecycle.kusionstack.io/stay-offline"
 	PodPreparingDeleteLabel = "podopslifecycle.kusionstack.io/preparing-to-delete"
