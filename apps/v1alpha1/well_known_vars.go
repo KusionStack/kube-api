@@ -38,3 +38,7 @@ const (
 	PodOpsLifecyclePreCheckStage  = "PreCheck"
 	PodOpsLifecyclePostCheckStage = "PostCheck"
 )
+
+const (
+	SwarmTopologyAwareInjectionEnvKey = "KUSIONSTACK_SWARM_TOPOLOGY_AWARE"
+)
