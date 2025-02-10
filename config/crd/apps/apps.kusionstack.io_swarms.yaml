@@ -14,7 +14,16 @@ spec:
     singular: swarm
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: The current revision.
+      jsonPath: .status.currentRevision
+      name: CURRENT_REVISION
+      type: string
+    - description: The updated revision.
+      jsonPath: .status.updatedRevision
+      name: UPDATED_REVISION
+      type: string
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: Swarm is the Schema for the multi pod groups API
