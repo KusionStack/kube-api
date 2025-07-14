@@ -11,9 +11,10 @@ $(CONTROLLER_GEN): $(LOCALBIN)
 	GOBIN=$(LOCALBIN) go install sigs.k8s.io/controller-tools/cmd/controller-gen@$(CONTROLLER_TOOLS_VERSION)
 
 manifests: controller-gen
-	@for dir in apps cluster; do \
+	@for dir in apps cluster rollout; do \
   		mkdir -p "config/crd/$$dir"; \
   	    $(CONTROLLER_GEN) rbac:roleName=manager-role crd:generateEmbeddedObjectMeta=true webhook paths="./$$dir/..." output:crd:artifacts:config="config/crd/$$dir"; \
+		rm -rf config/crd/$$dir/_.yaml; \
    	done
 
 generate: codegen controller-gen ## Generate code containing DeepCopy, DeepCopyInto, and DeepCopyObject method implementations.
