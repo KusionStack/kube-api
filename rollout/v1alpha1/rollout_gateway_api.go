@@ -21,6 +21,11 @@ import (
 )
 
 type HTTPRouteMatch struct {
+	// Path specifies a HTTP request path matcher.
+	//
+	// +optional
+	Path *gatewayapiv1.HTTPPathMatch `json:"path,omitempty"`
+
 	// Headers specifies HTTP request header matchers. Multiple match values are
 	// ANDed together, meaning, a request must match all the specified headers
 	// to select the route.
@@ -43,7 +48,7 @@ type HTTPRouteMatch struct {
 	QueryParams []gatewayapiv1.HTTPQueryParamMatch `json:"queryParams,omitempty"`
 }
 
-type BaseHTTPRouteRule struct {
+type HTTPRouteRule struct {
 	// Matches define conditions used for matching the rule against incoming
 	// HTTP requests. Each match is independent, i.e. this rule will be matched
 	// if **any** one of the matches is satisfied.
@@ -103,7 +108,6 @@ type BaseHTTPRouteRule struct {
 	//
 	// +optional
 	// +kubebuilder:validation:MaxItems=8
-	// +kubebuilder:default={{path:{ type: "PathPrefix", value: "/"}}}
 	Matches []HTTPRouteMatch `json:"matches,omitempty"`
 	// Filters define the filters that are applied to requests that match
 	// this rule.
@@ -139,13 +143,4 @@ type BaseHTTPRouteRule struct {
 	// +kubebuilder:validation:XValidation:message="RequestRedirect filter cannot be repeated",rule="self.filter(f, f.type == 'RequestRedirect').size() <= 1"
 	// +kubebuilder:validation:XValidation:message="URLRewrite filter cannot be repeated",rule="self.filter(f, f.type == 'URLRewrite').size() <= 1"
 	Filters []gatewayapiv1.HTTPRouteFilter `json:"filters,omitempty"`
-}
-
-type HTTPRouteRule struct {
-	BaseHTTPRouteRule `json:",inline"`
-	// Weight indicate how many percentage of traffic the canary pods should receive
-	//
-	// +kubebuilder:validation:Minimum=0
-	// +kubebuilder:validation:Maximum=100
-	Weight *int32 `json:"weight,omitempty"`
 }

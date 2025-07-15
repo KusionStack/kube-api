@@ -198,7 +198,13 @@ type TrafficStrategy struct {
 
 type HTTPTrafficStrategy struct {
 	HTTPRouteRule `json:",inline"`
-	BaseTraffic   *BaseHTTPRouteRule `json:"baseTraffic,omitempty"`
+	// Weight indicate how many percentage of traffic the canary pods should receive
+	//
+	// +kubebuilder:validation:Minimum=0
+	// +kubebuilder:validation:Maximum=100
+	Weight *int32 `json:"weight,omitempty"`
+	// BaseTraffic indicate the base traffic rule
+	BaseTraffic *HTTPRouteRule `json:"baseTraffic,omitempty"`
 }
 
 type BackendRoutingStatus struct {
