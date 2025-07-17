@@ -172,24 +172,48 @@ type BackendRoutingSpec struct {
 	Backend CrossClusterObjectReference `json:"backend"`
 	// Routes defines the list of routes
 	Routes []CrossClusterObjectReference `json:"routes,omitempty"`
+	// ForkedBackends
+	ForkedBackends *ForkedBackends `json:"forkedBackends,omitempty"`
 	// Forwarding defines the forwarding rules for canary scenario
 	Forwarding *BackendForwarding `json:"forwarding,omitempty"`
 }
 
-type BackendForwarding struct {
-	Stable StableBackendRule `json:"stable,omitempty"`
-	Canary CanaryBackendRule `json:"canary,omitempty"`
-}
-
-type StableBackendRule struct {
+type ForkedBackends struct {
 	// the temporary stable backend service name, generally it is the {originServiceName}-stable
-	Name string `json:"name,omitempty"`
+	Stable ForkedBackend `json:"stable"`
+	// the temporary canary backend service name, generally it is the {originServiceName}-canary
+	Canary ForkedBackend `json:"canary"`
 }
 
-type CanaryBackendRule struct {
-	// the temporary canary backend service name, generally it is the {originServiceName}-canary
-	Name            string `json:"name,omitempty"`
-	TrafficStrategy `json:",inline"`
+type ForkedBackend struct {
+	// the temporary backend name
+	Name string `json:"name"`
+	// ExtraLabelSelector defines the extra label selector for the temporary backend to select specific pods
+	ExtraLabelSelector map[string]string `json:"extraLabelSelector,omitempty"`
+}
+
+type BackendForwarding struct {
+	HTTP *HTTPForwarding `json:"http,omitempty"`
+}
+
+type HTTPForwarding struct {
+	Origin *OriginHTTPForwarding `json:"origin,omitempty"`
+	Stable *StableHTTPForwarding `json:"stable,omitempty"`
+	Canary *CanaryHTTPForwarding `json:"canary,omitempty"`
+}
+
+type OriginHTTPForwarding struct {
+	BackendName string `json:"backendName,omitempty"`
+}
+
+type StableHTTPForwarding struct {
+	// stable traffic rule
+	HTTPRouteRule `json:",inline"`
+}
+
+type CanaryHTTPForwarding struct {
+	// Canary traffic rule
+	CanaryHTTPRouteRule `json:",inline"`
 }
 
 type TrafficStrategy struct {
@@ -197,14 +221,9 @@ type TrafficStrategy struct {
 }
 
 type HTTPTrafficStrategy struct {
-	HTTPRouteRule `json:",inline"`
-	// Weight indicate how many percentage of traffic the canary pods should receive
-	//
-	// +kubebuilder:validation:Minimum=0
-	// +kubebuilder:validation:Maximum=100
-	Weight *int32 `json:"weight,omitempty"`
-	// BaseTraffic indicate the base traffic rule
-	BaseTraffic *HTTPRouteRule `json:"baseTraffic,omitempty"`
+	CanaryHTTPRouteRule `json:",inline"`
+	// StableTraffic indicate the base traffic rule
+	StableTraffic *HTTPRouteRule `json:"stableTraffic,omitempty"`
 }
 
 type BackendRoutingStatus struct {
@@ -214,6 +233,8 @@ type BackendRoutingStatus struct {
 	Phase BackendRoutingPhase `json:"phase,omitempty"`
 	// current backends routing
 	Backends BackendStatuses `json:"backends,omitempty"`
+	// Forwarding statuses
+	Forworading *ForwardingStatuses `json:"forwarding,omitempty"`
 	// route statuses
 	RouteStatuses []BackendRouteStatus `json:"routeStatuses,omitempty"`
 }
@@ -225,6 +246,19 @@ type BackendStatuses struct {
 	Stable BackendStatus `json:"stable,omitempty"`
 	// Canary backend status
 	Canary BackendStatus `json:"canary,omitempty"`
+}
+
+type ForwardingStatuses struct {
+	Origin *ForwardingStatus `json:"origin,omitempty"`
+	Stable *ForwardingStatus `json:"stable,omitempty"`
+	Canary *ForwardingStatus `json:"canary,omitempty"`
+}
+
+type ForwardingStatus struct {
+	// Name is the name of the referent.
+	BackendName string `json:"backendName"`
+	// Conditions represents the current condition of an backend.
+	Conditions BackendConditions `json:"conditions,omitempty"`
 }
 
 type BackendStatus struct {

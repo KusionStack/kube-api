@@ -48,6 +48,18 @@ type HTTPRouteMatch struct {
 	QueryParams []gatewayapiv1.HTTPQueryParamMatch `json:"queryParams,omitempty"`
 }
 
+type CanaryHTTPRouteRule struct {
+	// Weight indicate how many percentage of traffic the canary pods should receive
+	//
+	// +kubebuilder:validation:Minimum=0
+	// +kubebuilder:validation:Maximum=100
+	Weight *int32 `json:"weight,omitempty"`
+
+	// HTTPRouteRule contains the routing rules to apply when a request matches
+	// this rule.
+	HTTPRouteRule `json:",inline"`
+}
+
 type HTTPRouteRule struct {
 	// Matches define conditions used for matching the rule against incoming
 	// HTTP requests. Each match is independent, i.e. this rule will be matched
