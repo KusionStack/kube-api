@@ -207,11 +207,13 @@ type OriginHTTPForwarding struct {
 }
 
 type StableHTTPForwarding struct {
+	BackendName string `json:"backendName,omitempty"`
 	// stable traffic rule
 	HTTPRouteRule `json:",inline"`
 }
 
 type CanaryHTTPForwarding struct {
+	BackendName string `json:"backendName,omitempty"`
 	// Canary traffic rule
 	CanaryHTTPRouteRule `json:",inline"`
 }
@@ -229,14 +231,14 @@ type HTTPTrafficStrategy struct {
 type BackendRoutingStatus struct {
 	// ObservedGeneration is the most recent generation observed.
 	ObservedGeneration int64 `json:"observedGeneration,omitempty"`
+	// Conditions is the list of conditions
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
 	// Phase indicates the current phase of this object.
-	Phase BackendRoutingPhase `json:"phase,omitempty"`
+	// Phase BackendRoutingPhase `json:"phase,omitempty"`
 	// current backends routing
 	Backends BackendStatuses `json:"backends,omitempty"`
-	// Forwarding statuses
-	Forworading *ForwardingStatuses `json:"forwarding,omitempty"`
 	// route statuses
-	RouteStatuses []BackendRouteStatus `json:"routeStatuses,omitempty"`
+	Routes []BackendRouteStatus `json:"routes,omitempty"`
 }
 
 type BackendStatuses struct {
@@ -246,19 +248,6 @@ type BackendStatuses struct {
 	Stable BackendStatus `json:"stable,omitempty"`
 	// Canary backend status
 	Canary BackendStatus `json:"canary,omitempty"`
-}
-
-type ForwardingStatuses struct {
-	Origin *ForwardingStatus `json:"origin,omitempty"`
-	Stable *ForwardingStatus `json:"stable,omitempty"`
-	Canary *ForwardingStatus `json:"canary,omitempty"`
-}
-
-type ForwardingStatus struct {
-	// Name is the name of the referent.
-	BackendName string `json:"backendName"`
-	// Conditions represents the current condition of an backend.
-	Conditions BackendConditions `json:"conditions,omitempty"`
 }
 
 type BackendStatus struct {
@@ -285,18 +274,32 @@ type BackendConditions struct {
 	Terminating *bool `json:"terminating,omitempty" protobuf:"bytes,3,name=terminating"`
 }
 
-type BackendRoutingPhase string
-
+// condition type
 const (
-	BackendUpgrading BackendRoutingPhase = "BackendUpgrading"
-	RouteUpgrading   BackendRoutingPhase = "RouteSyncing"
-	Ready            BackendRoutingPhase = "Ready"
+	BackendRoutingReady        string = "Ready"
+	BackendRoutingBackendReady string = "BackendReady"
+	BackendRoutingRouteReady   string = "RouteReady"
 )
 
 // BackendRouteStatus defines the status of a backend route.
 type BackendRouteStatus struct {
 	// CrossClusterObjectReference defines the reference to a kind of route resource.
 	CrossClusterObjectReference `json:",inline"`
-	// Synced indicates whether the backend route is synced.
-	Synced bool `json:"synced,omitempty"`
+	// Forwarding statuses
+	// +optional
+	Forwarding *BackendRouteForwardingStatuses `json:"forwarding,omitempty"`
+	// Route condition
+	// +optional
+	Condition *metav1.Condition `json:"condition,omitempty"`
+}
+
+type BackendRouteForwardingStatuses struct {
+	Origin *BackendRouteForwardingStatus `json:"origin,omitempty"`
+	Stable *BackendRouteForwardingStatus `json:"stable,omitempty"`
+	Canary *BackendRouteForwardingStatus `json:"canary,omitempty"`
+}
+
+type BackendRouteForwardingStatus struct {
+	BackendName string            `json:"backendName"`
+	Conditions  BackendConditions `json:"conditions,omitempty"`
 }
