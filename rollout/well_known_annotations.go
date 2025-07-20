@@ -40,4 +40,9 @@ const (
 
 	// AnnoRolloutName is the name of the rollout object.
 	AnnoRolloutName = "rollout.kusionstack.io/name"
+
+	// AnnoRouteSpecBackup is the origin spec of route object. It is used to rollback.
+	AnnoRouteSpecBackup = "rollout.kusionstack.io/route-spec-backup"
+	// AnnoRouteConditions is the conditions of route object.
+	AnnoRouteConditions = "rollout.kusionstack.io/route-conditions"
 )
