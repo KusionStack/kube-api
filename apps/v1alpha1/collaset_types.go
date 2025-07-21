@@ -148,7 +148,7 @@ type PersistentVolumeClaimRetentionPolicy struct {
 	// WhenDeleted specifies what happens to PVCs created from CollaSet
 	// VolumeClaimTemplates when the CollaSet is deleted. The default policy
 	// of `Delete` policy causes those PVCs to be deleted.
-	//`Retain` causes PVCs to not be affected by StatefulSet deletion. The
+	// `Retain` causes PVCs to not be affected by StatefulSet deletion. The
 	// +optional
 	WhenDeleted PersistentVolumeClaimRetentionPolicyType `json:"whenDeleted,omitempty"`
 

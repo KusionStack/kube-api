@@ -64,11 +64,11 @@ const (
 	PodPreparingDeleteLabel = "podopslifecycle.kusionstack.io/preparing-to-delete"
 )
 
-var (
-	WellKnownLabelPrefixesWithID = []string{PodOperatingLabelPrefix, PodOperationTypeLabelPrefix, PodPreCheckLabelPrefix, PodPreCheckedLabelPrefix,
-		PodPreparingLabelPrefix, PodDoneOperationTypeLabelPrefix, PodUndoOperationTypeLabelPrefix, PodOperateLabelPrefix, PodOperatedLabelPrefix, PodPostCheckLabelPrefix,
-		PodPostCheckedLabelPrefix, PodCompletingLabelPrefix}
-)
+var WellKnownLabelPrefixesWithID = []string{
+	PodOperatingLabelPrefix, PodOperationTypeLabelPrefix, PodPreCheckLabelPrefix, PodPreCheckedLabelPrefix,
+	PodPreparingLabelPrefix, PodDoneOperationTypeLabelPrefix, PodUndoOperationTypeLabelPrefix, PodOperateLabelPrefix, PodOperatedLabelPrefix, PodPostCheckLabelPrefix,
+	PodPostCheckedLabelPrefix, PodCompletingLabelPrefix,
+}
 
 // CollaSet labels
 const (

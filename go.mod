@@ -1,6 +1,6 @@
 module kusionstack.io/kube-api
 
-go 1.22.0
+go 1.23
 
 require (
 	k8s.io/api v0.33.2

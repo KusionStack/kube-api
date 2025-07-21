@@ -305,7 +305,7 @@ type WebhookResponse struct {
 	FinishedNames []string `json:"finishedNames,omitempty"`
 	Message       string   `json:"message"`
 	Poll          bool     `json:"poll"`
-	// Deprecated, will replace by Poll
+	// Deprecated: will replace by Poll
 	Async bool `json:"async"`
 	// if Async, use TraceId as TaskId
 	TraceId string `json:"traceId"`
