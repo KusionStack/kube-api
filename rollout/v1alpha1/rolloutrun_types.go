@@ -142,17 +142,10 @@ type RolloutRunStatus struct {
 	Error *CodeReasonMessage `json:"error,omitempty"`
 	// CanaryStatus describes the state of the active canary release
 	// +optional
-	CanaryStatus *RolloutRunCanaryStatus `json:"canaryStatus,omitempty"`
+	CanaryStatus *RolloutRunStepStatus `json:"canaryStatus,omitempty"`
 	// BatchStatus describes the state of the active batch release
 	// +optional
 	BatchStatus *RolloutRunBatchStatus `json:"batchStatus,omitempty"`
-	// TargetStatuses describes the referenced workloads status
-	// +optional
-	TargetStatuses []RolloutWorkloadStatus `json:"targetStatuses,omitempty"`
-}
-
-type RolloutRunCanaryStatus struct {
-	RolloutRunStepStatus `json:",inline"`
 	// TargetStatuses describes the referenced workloads status
 	// +optional
 	TargetStatuses []RolloutWorkloadStatus `json:"targetStatuses,omitempty"`
