@@ -35,12 +35,12 @@ const (
 	// AnnoRolloutProgressingInfos contains a slice of progressing info on resource.
 	AnnoRolloutProgressingInfos = "rollout.kusionstack.io/progressing-infos"
 
-	// AnnoPodRolloutProgressingInfos contains a slice of progressing infos on a pod.
-	AnnoPodRolloutProgressingInfos = "rollout.kusionstack.io/pod-progressing-infos"
-
 	// AnnoRolloutName is the name of the rollout object.
 	AnnoRolloutName = "rollout.kusionstack.io/name"
+)
 
+// traffic annotations
+const (
 	// AnnoRouteSpecBackup is the origin spec of route object. It is used to rollback.
 	AnnoRouteSpecBackup = "rollout.kusionstack.io/route-spec-backup"
 	// AnnoRouteConditions is the conditions of route object.
