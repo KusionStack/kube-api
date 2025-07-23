@@ -116,3 +116,13 @@ type CanaryProgressingInfo struct{}
 type BatchProgressingInfo struct {
 	CurrentBatchIndex int32 `json:"currentBatchIndex"`
 }
+
+const (
+	RouteConditionTypeReady  = "Ready"
+	RouteConditionTypeSynced = "Synced"
+)
+
+// RouteConditionExtension contains the conditions of route
+type RouteConditionExtension struct {
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
+}
