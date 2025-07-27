@@ -39,10 +39,11 @@ const (
 	AnnoRolloutName = "rollout.kusionstack.io/name"
 )
 
-// traffic annotations
+// new style key
 const (
-	// AnnoRouteSpecBackup is the origin spec of route object. It is used to rollback.
-	AnnoRouteSpecBackup = "rollout.kusionstack.io/route-spec-backup"
-	// AnnoRouteConditions is the conditions of route object.
-	AnnoRouteConditions = "rollout.kusionstack.io/route-conditions"
+	// OriginRouteSpecAnnoKey is the backup of origin route object spec. It is used to rollback.
+	OriginRouteSpecAnnoKey = "rollout.kusionstack.io/origin-route-spec"
+
+	// AnnoConditionExtension is the annotation key of condition extension.
+	ConditionExtensionAnnoKey = "rollout.kusionstack.io/condition-extension"
 )
