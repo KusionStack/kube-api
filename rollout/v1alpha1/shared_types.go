@@ -118,11 +118,11 @@ type BatchProgressingInfo struct {
 }
 
 const (
-	RouteConditionTypeReady  = "Ready"
-	RouteConditionTypeSynced = "Synced"
+	ConditionTypeReady  = "Ready"
+	ConditionTypeSynced = "Synced"
 )
 
-// RouteConditionExtension contains the conditions of route
-type RouteConditionExtension struct {
+// ConditionExtension contains the conditions of route
+type ConditionExtension struct {
 	Conditions []metav1.Condition `json:"conditions,omitempty"`
 }
