@@ -24,12 +24,13 @@ const (
 // canary labels
 const (
 	// This label will be set on objects to indicate that they are temporary resources.
-	LabelCanaryResource = "rollout.kusionstack.io/canary-resource"
+	CanaryResourceLabelKey = "rollout.kusionstack.io/canary-resource"
 
 	// This label indicates the revision of pods controlled by workload.
-	LabelTrafficLane            = "rollout.kusionstack.io/traffic-lane"
-	LabelValueTrafficLaneStable = "stable"
-	LabelValueTrafficLaneCanary = "canary"
+	TrafficLaneLabelKey = "rollout.kusionstack.io/traffic-lane"
+	StableTrafficLane   = "stable"
+	CanaryTrafficLane   = "canary"
+	UnknownTrafficLane  = "__unknown__"
 )
 
 // rollout class label
