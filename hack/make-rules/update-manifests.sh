@@ -40,8 +40,8 @@ for dir in apps cluster rollout; do
             continue
         fi
         # Traversal delete x-kubernetes-validations fields in crd yaml
-        yq -i eval 'del(.. | ."x-kubernetes-validations"?)' "$file"
+        ${ROOT_DIR}/bin/yq -i eval 'del(.. | ."x-kubernetes-validations"?)' "$file"
         # delete array indent
-        yamlfmt -formatter indentless_arrays=true "$file"
+        ${ROOT_DIR}/bin/yamlfmt -formatter indentless_arrays=true "$file"
     done
 done
