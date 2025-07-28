@@ -86,7 +86,7 @@ install::yq() {
 }
 
 install::yamlfmt() {
-    if test -e "${LOCALBIN_OS_ARCH}"/yq; then
+    if test -e "${LOCALBIN_OS_ARCH}"/yamlfmt; then
         return
     fi
     log::status "Installing google/yamlfmt"

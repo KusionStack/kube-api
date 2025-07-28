@@ -79,13 +79,35 @@ type LabelCheckRule struct {
 }
 
 type AvailableRule struct {
-	// MaxUnavailableValue is the expected max unavailable replicas which is allowed to be a integer or a percentage of the whole
+	// MaxUnavailableValue is the expected max unavailable replicas which is allowed to be an integer or a percentage of the whole
 	// number of the target resources.
 	MaxUnavailableValue *intstr.IntOrString `json:"maxUnavailableValue,omitempty"`
 
-	// MinAvailableValue is the expected min available replicas which is allowed to be a integer or a percentage of the whole
+	// MaxUnavailablePolicy is an option to apply max unavailable by adaptive policy.
+	// +optional
+	MaxUnavailablePolicy *AdaptivePolicy `json:"maxUnavailablePolicy,omitempty"`
+
+	// MinAvailableValue is the expected min available replicas which is allowed to be an integer or a percentage of the whole
 	// number of the target resources.
 	MinAvailableValue *intstr.IntOrString `json:"minAvailableValue,omitempty"`
+
+	// MaxUnavailablePolicy is an option to apply min available by adaptive policy.
+	// +optional
+	MinAvailablePolicy *AdaptivePolicy `json:"minAvailablePolicy,omitempty"`
+}
+
+type AdaptivePolicy struct {
+	// ExpFunc is an exponentiation expression to calculate the expected value.
+	// func: f(x) = coeff * x ^ pow.
+	ExpFunc *ExpFunc `json:"expFunc,omitempty"`
+}
+
+type ExpFunc struct {
+	// Coeff stands for coefficient in this exponentiation.
+	Coeff *string `json:"coeff,omitempty"`
+
+	// Pow stands for power in this exponentiation.
+	Pow *string `json:"pow,omitempty"`
 }
 
 type TransitionRuleWebhook struct {
