@@ -70,6 +70,10 @@ type RolloutRunSpec struct {
 	// Batch Strategy
 	// +optional
 	Batch *RolloutRunBatchStrategy `json:"batch,omitempty"`
+
+	// Rollback Strategy
+	// +optional
+	Rollback *RolloutRunRollbackStrategy `json:"rollback,omitempty"`
 }
 
 type RolloutRunBatchStrategy struct {
@@ -79,6 +83,11 @@ type RolloutRunBatchStrategy struct {
 	// Toleration is the toleration policy of the canary strategy
 	// +optional
 	Toleration *TolerationStrategy `json:"toleration,omitempty"`
+}
+
+type RolloutRunRollbackStrategy struct {
+	// Batches define the order of phases to execute release in rollback release
+	Batches []RolloutRunRollbackStep `json:"batches,omitempty"`
 }
 
 type RolloutRunStep struct {
@@ -115,6 +124,19 @@ type RolloutRunCanaryStrategy struct {
 	TemplateMetadataPatch *MetadataPatch `json:"podTemplateMetadataPatch,omitempty"`
 }
 
+type RolloutRunRollbackStep struct {
+	// desired target replicas
+	Targets []RolloutRunStepTarget `json:"targets"`
+
+	// If set to true, the rollout will be paused before the step starts.
+	// +optional
+	Breakpoint bool `json:"breakpoint,omitempty"`
+
+	// Properties contains additional information for step
+	// +optional
+	Properties map[string]string `json:"properties,omitempty"`
+}
+
 type RolloutRunStepTarget struct {
 	CrossClusterObjectNameReference `json:",inline"`
 
@@ -146,6 +168,9 @@ type RolloutRunStatus struct {
 	// BatchStatus describes the state of the active batch release
 	// +optional
 	BatchStatus *RolloutRunBatchStatus `json:"batchStatus,omitempty"`
+	// RollbackStatus describes the state of the active rollback release
+	// +optional
+	RollbackStatus *RolloutRunBatchStatus `json:"rollbackStatus,omitempty"`
 	// TargetStatuses describes the referenced workloads status
 	// +optional
 	TargetStatuses []RolloutWorkloadStatus `json:"targetStatuses,omitempty"`
