@@ -799,6 +799,11 @@ func (in *ProgressingInfo) DeepCopyInto(out *ProgressingInfo) {
 		*out = new(BatchProgressingInfo)
 		**out = **in
 	}
+	if in.Rollback != nil {
+		in, out := &in.Rollback, &out.Rollback
+		*out = new(BatchProgressingInfo)
+		**out = **in
+	}
 	return
 }
 

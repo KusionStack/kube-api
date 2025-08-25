@@ -109,6 +109,7 @@ type ProgressingInfo struct {
 	RolloutID   string                 `json:"rolloutID,omitempty"`
 	Canary      *CanaryProgressingInfo `json:"canary,omitempty"`
 	Batch       *BatchProgressingInfo  `json:"batch,omitempty"`
+	Rollback    *BatchProgressingInfo  `json:"rollback,omitempty"`
 }
 
 type CanaryProgressingInfo struct{}
