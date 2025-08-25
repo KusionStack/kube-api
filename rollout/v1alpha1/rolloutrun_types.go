@@ -132,7 +132,7 @@ type RolloutRunRollbackStep struct {
 	// +optional
 	Breakpoint bool `json:"breakpoint,omitempty"`
 
-	// Properties contains additional information for step
+	// Properties contains additional information for step.
 	// +optional
 	Properties map[string]string `json:"properties,omitempty"`
 }
