@@ -168,6 +168,9 @@ type RolloutRunStatus struct {
 	// BatchStatus describes the state of the active batch release
 	// +optional
 	BatchStatus *RolloutRunBatchStatus `json:"batchStatus,omitempty"`
+	// RollbackStatus describes the state of the active rollback release
+	// +optional
+	RollbackStatus *RolloutRunBatchStatus `json:"rollbackStatus,omitempty"`
 	// TargetStatuses describes the referenced workloads status
 	// +optional
 	TargetStatuses []RolloutWorkloadStatus `json:"targetStatuses,omitempty"`

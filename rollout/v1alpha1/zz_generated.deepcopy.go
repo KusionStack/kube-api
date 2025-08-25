@@ -1210,6 +1210,11 @@ func (in *RolloutRunStatus) DeepCopyInto(out *RolloutRunStatus) {
 		*out = new(RolloutRunBatchStatus)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.RollbackStatus != nil {
+		in, out := &in.RollbackStatus, &out.RollbackStatus
+		*out = new(RolloutRunBatchStatus)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TargetStatuses != nil {
 		in, out := &in.TargetStatuses, &out.TargetStatuses
 		*out = make([]RolloutWorkloadStatus, len(*in))
