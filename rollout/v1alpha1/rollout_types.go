@@ -242,11 +242,7 @@ const (
 	// In Batch strategy, it occurs before the PreBatchStepHook.
 	RolloutStepResourceRecycling RolloutStepState = "ResourceRecycling"
 
-	// RolloutStepRecyleCanaryRoute indicates that the step is recycling canary routes.
+	// RolloutStepResetCanaryResource indicates that the step is resetting canary resources.
 	// In Rollback strategy, it occurs before BatchUpgrading.
-	RolloutStepRecyleCanaryRoute RolloutStepState = "RecycleCanaryRoute"
-
-	// RolloutStepPostRelease indicates that the step is doing post actions after release.
-	// In Rollback strategy, it occurs after PostRollbackStepHook.
-	RolloutStepPostRelease RolloutStepState = "PostRelease"
+	RolloutStepResetCanaryResource RolloutStepState = "ResetCanaryResource"
 )
