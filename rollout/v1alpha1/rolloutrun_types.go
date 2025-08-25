@@ -86,7 +86,7 @@ type RolloutRunBatchStrategy struct {
 }
 
 type RolloutRunRollbackStrategy struct {
-	// Batches define the order of phases to execute release in rollback release
+	// Batches define the order of phases to execute release in rollback
 	Batches []RolloutRunRollbackStep `json:"batches,omitempty"`
 }
 
