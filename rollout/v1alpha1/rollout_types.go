@@ -219,6 +219,9 @@ const (
 	// RolloutStepPreBatchStepHook indicates that the step is in the pre-batch hook.
 	RolloutStepPreBatchStepHook RolloutStepState = RolloutStepState(PreBatchStepHook)
 
+	// RolloutStepPreRollbackStepHook indicates that the step is in the pre-rollback hook.
+	RolloutStepPreRollbackStepHook RolloutStepState = RolloutStepState(PreRollbackStepHook)
+
 	// RolloutStepRunning indicates that the step is running.
 	RolloutStepRunning RolloutStepState = "Running"
 
@@ -227,6 +230,9 @@ const (
 
 	// RolloutStepPostBatchStepHook indicates that the step is in the post-batch hook.
 	RolloutStepPostBatchStepHook RolloutStepState = RolloutStepState(PostBatchStepHook)
+
+	// RolloutStepPostRollbackStepHook indicates that the step is in the post-rollback hook.
+	RolloutStepPostRollbackStepHook RolloutStepState = RolloutStepState(PostRollbackStepHook)
 
 	// RolloutStepSucceeded indicates that the step is completed.
 	RolloutStepSucceeded RolloutStepState = "Succeeded"

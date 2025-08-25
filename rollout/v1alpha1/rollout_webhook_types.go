@@ -169,10 +169,12 @@ type RolloutWebhookReviewBatch struct {
 type HookType string
 
 const (
-	PreCanaryStepHook  HookType = "PreCanaryStepHook"
-	PostCanaryStepHook HookType = "PostCanaryStepHook"
-	PreBatchStepHook   HookType = "PreBatchStepHook"
-	PostBatchStepHook  HookType = "PostBatchStepHook"
+	PreCanaryStepHook    HookType = "PreCanaryStepHook"
+	PostCanaryStepHook   HookType = "PostCanaryStepHook"
+	PreBatchStepHook     HookType = "PreBatchStepHook"
+	PostBatchStepHook    HookType = "PostBatchStepHook"
+	PreRollbackStepHook  HookType = "PreRollbackStepHook"
+	PostRollbackStepHook HookType = "PostRollbackStepHook"
 )
 
 type RolloutWebhookReviewStatus struct {
