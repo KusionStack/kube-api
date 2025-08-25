@@ -4500,6 +4500,55 @@ spec:
                 required:
                 - targets
                 type: object
+              rollback:
+                description: Rollback Strategy
+                properties:
+                  batches:
+                    description: Batches define the order of phases to execute release in rollback release
+                    items:
+                      properties:
+                        breakpoint:
+                          description: If set to true, the rollout will be paused before the step starts.
+                          type: boolean
+                        properties:
+                          additionalProperties:
+                            type: string
+                          description: Properties contains additional information for step
+                          type: object
+                        targets:
+                          description: desired target replicas
+                          items:
+                            properties:
+                              cluster:
+                                description: Cluster indicates the name of cluster
+                                type: string
+                              name:
+                                description: Name is the resource name
+                                type: string
+                              replicaSlidingWindow:
+                                anyOf:
+                                - type: integer
+                                - type: string
+                                description: |-
+                                  ReplicaSlidingWindow used to control the number of pods that are allowed to be upgraded in
+                                  a sliding window for progressive rollout smoothly.
+                                x-kubernetes-int-or-string: true
+                              replicas:
+                                anyOf:
+                                - type: integer
+                                - type: string
+                                description: Replicas is the replicas of the rollout task, which represents the number of pods to be upgraded
+                                x-kubernetes-int-or-string: true
+                            required:
+                            - name
+                            - replicas
+                            type: object
+                          type: array
+                      required:
+                      - targets
+                      type: object
+                    type: array
+                type: object
               targetType:
                 description: TargetType defines the GroupVersionKind of target resource
                 properties:

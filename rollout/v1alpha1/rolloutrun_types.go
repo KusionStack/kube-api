@@ -70,6 +70,10 @@ type RolloutRunSpec struct {
 	// Batch Strategy
 	// +optional
 	Batch *RolloutRunBatchStrategy `json:"batch,omitempty"`
+
+	// Rollback Strategy
+	// +optional
+	Rollback *RolloutRunRollbackStrategy `json:"rollback,omitempty"`
 }
 
 type RolloutRunBatchStrategy struct {
@@ -81,6 +85,11 @@ type RolloutRunBatchStrategy struct {
 	Toleration *TolerationStrategy `json:"toleration,omitempty"`
 }
 
+type RolloutRunRollbackStrategy struct {
+	// Batches define the order of phases to execute release in rollback release
+	Batches []RolloutRunRollbackStep `json:"batches,omitempty"`
+}
+
 type RolloutRunStep struct {
 	// desired target replicas
 	Targets []RolloutRunStepTarget `json:"targets"`
@@ -88,6 +97,19 @@ type RolloutRunStep struct {
 	// traffic strategy
 	// +optional
 	Traffic *TrafficStrategy `json:"traffic,omitempty"`
+
+	// If set to true, the rollout will be paused before the step starts.
+	// +optional
+	Breakpoint bool `json:"breakpoint,omitempty"`
+
+	// Properties contains additional information for step
+	// +optional
+	Properties map[string]string `json:"properties,omitempty"`
+}
+
+type RolloutRunRollbackStep struct {
+	// desired target replicas
+	Targets []RolloutRunStepTarget `json:"targets"`
 
 	// If set to true, the rollout will be paused before the step starts.
 	// +optional
