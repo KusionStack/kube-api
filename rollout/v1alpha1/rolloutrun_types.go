@@ -202,7 +202,11 @@ const (
 	RolloutRunPhaseCanceling RolloutRunPhase = "Canceling"
 	// RolloutRunPhaseCanceled defines the phase of rolloutRun canceled
 	RolloutRunPhaseCanceled RolloutRunPhase = "Canceled"
-	// RolloutRunPhaseFailed defines the phase of rolloutRun succeeded
+	// RolloutRunPhaseRollbacking defines the phase of rolloutRun rollbacking
+	RolloutRunPhaseRollbacking RolloutRunPhase = "Rollbacking"
+	// RolloutRunPhaseRollbacked defines the phase of rolloutRun rollbacked
+	RolloutRunPhaseRollbacked RolloutRunPhase = "Rollbacked"
+	// RolloutRunPhaseSucceeded defines the phase of rolloutRun succeeded
 	RolloutRunPhaseSucceeded RolloutRunPhase = "Succeeded"
 )
 
