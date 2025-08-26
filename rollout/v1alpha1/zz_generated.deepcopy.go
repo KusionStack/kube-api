@@ -1647,6 +1647,11 @@ func (in *RolloutWebhookReviewSpec) DeepCopyInto(out *RolloutWebhookReviewSpec) 
 		*out = new(RolloutWebhookReviewBatch)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Rollback != nil {
+		in, out := &in.Rollback, &out.Rollback
+		*out = new(RolloutWebhookReviewBatch)
+		(*in).DeepCopyInto(*out)
+	}
 	return
 }
 

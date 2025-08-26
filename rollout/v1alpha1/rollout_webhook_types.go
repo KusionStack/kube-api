@@ -147,6 +147,10 @@ type RolloutWebhookReviewSpec struct {
 	// Batch defines the batch step webhook review spec
 	// +optional
 	Batch *RolloutWebhookReviewBatch `json:"batch,omitempty"`
+
+	// Rollback defines the rollback step webhook review spec
+	// +optional
+	Rollback *RolloutWebhookReviewBatch `json:"rollback,omitempty"`
 }
 
 type RolloutWebhookReviewCanary struct {
