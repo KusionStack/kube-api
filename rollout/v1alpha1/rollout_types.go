@@ -241,8 +241,4 @@ const (
 	// In Canary strategy, it occurs after the user confirms (Paused).
 	// In Batch strategy, it occurs before the PreBatchStepHook.
 	RolloutStepResourceRecycling RolloutStepState = "ResourceRecycling"
-
-	// RolloutStepResetCanaryResource indicates that the step is resetting canary resources.
-	// In Rollback strategy, it occurs before BatchUpgrading.
-	RolloutStepResetCanaryResource RolloutStepState = "ResetCanaryResource"
 )
