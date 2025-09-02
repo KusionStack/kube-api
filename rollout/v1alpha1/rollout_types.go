@@ -150,8 +150,6 @@ const (
 	RolloutConditionTerminating ConditionType = "Terminating"
 	// RolloutConditionTrigger means the rollout is triggered.
 	RolloutConditionTrigger ConditionType = "Trigger"
-	// RolloutConditionRollbacking measns the rollout is rollbacking.
-	RolloutConditionRollbacking ConditionType = "Rollbacking"
 
 	// rollout condition reasons
 
@@ -165,6 +163,10 @@ const (
 	RolloutReasonProgressingCompleted = "Completed"
 	// RolloutReasonProgressingCanceled means the rollout is completed.
 	RolloutReasonProgressingCanceled = "Canceled"
+	// RolloutReasonProgressingRollbacked means the rollout is rollbacked.
+	RolloutReasonProgressingRollbacking = "Rollbacking"
+	// RolloutReasonProgressingRollbacked means the rollout is rollbacked.
+	RolloutReasonProgressingRollbacked = "Rollbacked"
 	// RolloutReasonProgressingError means the rollout is completed.
 	RolloutReasonProgressingError = "Error"
 )
