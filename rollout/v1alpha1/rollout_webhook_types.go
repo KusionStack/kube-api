@@ -147,6 +147,10 @@ type RolloutWebhookReviewSpec struct {
 	// Batch defines the batch step webhook review spec
 	// +optional
 	Batch *RolloutWebhookReviewBatch `json:"batch,omitempty"`
+
+	// Rollback defines the rollback step webhook review spec
+	// +optional
+	Rollback *RolloutWebhookReviewBatch `json:"rollback,omitempty"`
 }
 
 type RolloutWebhookReviewCanary struct {
@@ -169,10 +173,12 @@ type RolloutWebhookReviewBatch struct {
 type HookType string
 
 const (
-	PreCanaryStepHook  HookType = "PreCanaryStepHook"
-	PostCanaryStepHook HookType = "PostCanaryStepHook"
-	PreBatchStepHook   HookType = "PreBatchStepHook"
-	PostBatchStepHook  HookType = "PostBatchStepHook"
+	PreCanaryStepHook    HookType = "PreCanaryStepHook"
+	PostCanaryStepHook   HookType = "PostCanaryStepHook"
+	PreBatchStepHook     HookType = "PreBatchStepHook"
+	PostBatchStepHook    HookType = "PostBatchStepHook"
+	PreRollbackStepHook  HookType = "PreRollbackStepHook"
+	PostRollbackStepHook HookType = "PostRollbackStepHook"
 )
 
 type RolloutWebhookReviewStatus struct {

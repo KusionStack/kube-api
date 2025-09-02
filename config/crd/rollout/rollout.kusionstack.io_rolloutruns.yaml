@@ -4500,6 +4500,55 @@ spec:
                 required:
                 - targets
                 type: object
+              rollback:
+                description: Rollback Strategy
+                properties:
+                  batches:
+                    description: Batches define the order of phases to execute release in rollback release
+                    items:
+                      properties:
+                        breakpoint:
+                          description: If set to true, the rollout will be paused before the step starts.
+                          type: boolean
+                        properties:
+                          additionalProperties:
+                            type: string
+                          description: Properties contains additional information for step.
+                          type: object
+                        targets:
+                          description: desired target replicas
+                          items:
+                            properties:
+                              cluster:
+                                description: Cluster indicates the name of cluster
+                                type: string
+                              name:
+                                description: Name is the resource name
+                                type: string
+                              replicaSlidingWindow:
+                                anyOf:
+                                - type: integer
+                                - type: string
+                                description: |-
+                                  ReplicaSlidingWindow used to control the number of pods that are allowed to be upgraded in
+                                  a sliding window for progressive rollout smoothly.
+                                x-kubernetes-int-or-string: true
+                              replicas:
+                                anyOf:
+                                - type: integer
+                                - type: string
+                                description: Replicas is the replicas of the rollout task, which represents the number of pods to be upgraded
+                                x-kubernetes-int-or-string: true
+                            required:
+                            - name
+                            - replicas
+                            type: object
+                          type: array
+                      required:
+                      - targets
+                      type: object
+                    type: array
+                type: object
               targetType:
                 description: TargetType defines the GroupVersionKind of target resource
                 properties:
@@ -4888,6 +4937,115 @@ spec:
               phase:
                 description: Phase indecates the current phase of rollout
                 type: string
+              rollbackStatus:
+                description: RollbackStatus describes the state of the active rollback release
+                properties:
+                  currentBatchIndex:
+                    description: CurrentBatchIndex defines the current batch index of batch release progress.
+                    format: int32
+                    type: integer
+                  currentBatchState:
+                    description: CurrentBatchState indicates the current batch state.
+                    type: string
+                  records:
+                    description: Records contains all batches status details.
+                    items:
+                      properties:
+                        finishTime:
+                          description: FinishTime is the time when the stage finished
+                          format: date-time
+                          type: string
+                        index:
+                          description: Index is the id of the batch
+                          format: int32
+                          type: integer
+                        startTime:
+                          description: StartTime is the time when the stage started
+                          format: date-time
+                          type: string
+                        state:
+                          description: State is Rollout step state
+                          type: string
+                        targets:
+                          description: WorkloadDetails contains release details for each workload
+                          items:
+                            properties:
+                              cluster:
+                                description: Cluster defines which cluster the workload is in.
+                                type: string
+                              generation:
+                                description: Generation is the found in workload metadata.
+                                format: int64
+                                type: integer
+                              name:
+                                description: Name is the workload name
+                                type: string
+                              observedGeneration:
+                                description: ObservedGeneration is the most recent generation observed for this workload.
+                                format: int64
+                                type: integer
+                              replicas:
+                                description: Replicas is the desired number of pods targeted by workload
+                                format: int32
+                                type: integer
+                              stableRevision:
+                                description: StableRevision is the old stable revision used to generate pods.
+                                type: string
+                              updatedAvailableReplicas:
+                                description: UpdatedAvailableReplicas is the number of service available pods targeted by workload that have the updated template spec.
+                                format: int32
+                                type: integer
+                              updatedReadyReplicas:
+                                description: UpdatedReadyReplicas is the number of ready pods targeted by workload that have the updated template spec.
+                                format: int32
+                                type: integer
+                              updatedReplicas:
+                                description: UpdatedReplicas is the number of pods targeted by workload that have the updated template spec.
+                                format: int32
+                                type: integer
+                              updatedRevision:
+                                description: UpdatedRevision is the updated template revision used to generate pods.
+                                type: string
+                            required:
+                            - replicas
+                            - updatedAvailableReplicas
+                            - updatedReadyReplicas
+                            - updatedReplicas
+                            type: object
+                          type: array
+                        webhooks:
+                          description: Webhooks contains webhook status
+                          items:
+                            properties:
+                              code:
+                                description: Code is a globally unique identifier
+                                type: string
+                              failureCount:
+                                description: Failure count
+                                format: int32
+                                type: integer
+                              hookType:
+                                description: Webhook Type
+                                type: string
+                              message:
+                                description: A human-readable message indicating details about the transition.
+                                type: string
+                              name:
+                                description: Webhook Name
+                                type: string
+                              reason:
+                                description: A human-readable short word
+                                type: string
+                              state:
+                                description: Current webhook worker state
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                required:
+                - currentBatchIndex
+                type: object
               targetStatuses:
                 description: TargetStatuses describes the referenced workloads status
                 items:
