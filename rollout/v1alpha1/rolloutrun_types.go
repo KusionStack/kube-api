@@ -255,5 +255,5 @@ func (r *RolloutRun) IsCompleted() bool {
 	if r == nil {
 		return false
 	}
-	return r.Status.Phase == RolloutRunPhaseSucceeded || r.Status.Phase == RolloutRunPhaseCanceled
+	return r.Status.Phase == RolloutRunPhaseSucceeded || r.Status.Phase == RolloutRunPhaseCanceled || r.Status.Phase == RolloutRunPhaseRollbacked
 }
