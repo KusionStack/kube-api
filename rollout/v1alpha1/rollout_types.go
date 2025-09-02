@@ -150,6 +150,8 @@ const (
 	RolloutConditionTerminating ConditionType = "Terminating"
 	// RolloutConditionTrigger means the rollout is triggered.
 	RolloutConditionTrigger ConditionType = "Trigger"
+	// RolloutConditionRollbacking measns the rollout is rollbacking.
+	RolloutConditionRollbacking ConditionType = "Rollbacking"
 
 	// rollout condition reasons
 
