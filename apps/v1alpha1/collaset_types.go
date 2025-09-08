@@ -28,6 +28,19 @@ const (
 	CollaSetUpdate CollaSetConditionType = "Update"
 )
 
+// PodNamingPolicy is a string enumeration that determaines how pod name will be generated.
+// A collaset pod name contains two parts to be placed in a string formation %s-%s; the prefix
+// is name of collaset, and the postfix is determined by PodNamingPolicy.
+type PodNamingPolicy string
+
+const (
+	// PodNamingPolicyPersistentSequence uses persistent sequential numbers as pod name postfix.
+	PodNamingPolicyPersistentSequence PodNamingPolicy = "PersistentSequence"
+	// PodNamingPolicyDefault uses random strings which are provided by Kubernetes as pod name postfix.
+	// This is defaulting value.
+	PodNamingPolicyDefault PodNamingPolicy = "Default"
+)
+
 // PersistentVolumeClaimRetentionPolicyType is a string enumeration of the policies that will determine
 // which action will be applied on volumes from the VolumeClaimTemplates when the CollaSet is
 // deleted or scaled down.
@@ -119,6 +132,9 @@ type ScaleStrategy struct {
 	// Context defaults to be CollaSet's name.
 	// +optional
 	Context string `json:"context,omitempty"`
+
+	// PodNamingPolicy indicates how a new pod name is generated.
+	PodNamingPolicy PodNamingPolicy `json:"podNamingPolicy,omitempty"`
 
 	// PodToExclude indicates the pods which will be orphaned by CollaSet.
 	// +optional
