@@ -28,17 +28,17 @@ const (
 	CollaSetUpdate CollaSetConditionType = "Update"
 )
 
-// ReplicaNamingPolicy is a string enumeration that determaines how pod name will be generated.
+// PodNamingPolicy is a string enumeration that determaines how pod name will be generated.
 // A collaset pod name contains two parts to be placed in a string formation %s-%s; the prefix
-// is name of collaset, and the suffix is determined by ReplicaNamingPolicy.
-type ReplicaNamingPolicy string
+// is name of collaset, and the suffix is determined by PodNamingPolicy.
+type PodNamingPolicy string
 
 const (
-	// ReplicaNamingPolicyPersistentSequence uses persistent sequential numbers as pod name suffix.
-	ReplicaNamingPolicyPersistentSequence ReplicaNamingPolicy = "PersistentSequence"
-	// ReplicaNamingPolicyDefault uses random strings which are provided by Kubernetes as pod name suffix.
+	// PodNamingPolicyPersistentSequence uses persistent sequential numbers as pod name suffix.
+	PodNamingPolicyPersistentSequence PodNamingPolicy = "PersistentSequence"
+	// PodNamingPolicyDefault uses random strings which are provided by Kubernetes as pod name suffix.
 	// This is defaulting value.
-	ReplicaNamingPolicyDefault ReplicaNamingPolicy = "Default"
+	PodNamingPolicyDefault PodNamingPolicy = "Default"
 )
 
 // PersistentVolumeClaimRetentionPolicyType is a string enumeration of the policies that will determine
@@ -122,7 +122,7 @@ type CollaSetSpec struct {
 
 	// NamigPolicy indicates the strategy detail that will be used for replica naming
 	// +optional
-	NamingPolicy *NamingPolicy `json:"namimgPolicy,omitempty"`
+	NamingStrategy *NamingStrategy `json:"namingStrategy,omitempty"`
 
 	// Indicate the number of histories to be conserved
 	// If unspecified, defaults to 20
@@ -161,9 +161,9 @@ type ScaleStrategy struct {
 	OperationDelaySeconds *int32 `json:"operationDelaySeconds,omitempty"`
 }
 
-type NamingPolicy struct {
-	// ReplicaNamingPolicy indicates how a new pod name is generated.
-	ReplicaNamingPolicy ReplicaNamingPolicy `json:"replicaNamingPolicy,omitempty"`
+type NamingStrategy struct {
+	// PodNamingPolicy indicates how a new pod name is generated.
+	PodNamingPolicy PodNamingPolicy `json:"podNamingPolicy,omitempty"`
 }
 
 type PersistentVolumeClaimRetentionPolicy struct {
