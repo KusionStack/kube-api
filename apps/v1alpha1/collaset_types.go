@@ -28,18 +28,16 @@ const (
 	CollaSetUpdate CollaSetConditionType = "Update"
 )
 
-// PodNamingPolicy is a string enumeration that determaines how pod name will be generated.
-// A collaset pod name contains two parts to be placed in a string formation %s-%s; the prefix
-// is name of collaset, and the suffix is determined by PodNamingPolicy.
-type PodNamingPolicy string
+// PodNamingSuffixPolicy indicates how a new pod name suffix part is generated.
+type PodNamingSuffixPolicy string
 
 const (
-	// PodNamingPolicyPersistentSequence uses persistent sequential numbers as pod name suffix.
-	PodNamingPolicyPersistentSequence PodNamingPolicy = "PersistentSequence"
-	// PodNamingPolicyGenerateName uses collaset name as pod generateName, which is the prefix
-	// of pod name. Kubernetes then adds a random unique string as suffix after the generateName.
+	// PodNamingSuffixPolicyPersistentSequence uses persistent sequential numbers as pod name suffix.
+	PodNamingSuffixPolicyPersistentSequence PodNamingSuffixPolicy = "PersistentSequence"
+	// PodNamingSuffixPolicyRandom uses collaset name as pod generateName, which is the prefix
+	// of pod name. Kubernetes then adds a random string as suffix after the generateName.
 	// This is defaulting policy.
-	PodNamingPolicyGenerateName PodNamingPolicy = "GenerateName"
+	PodNamingSuffixPolicyRandom PodNamingSuffixPolicy = "Random"
 )
 
 // PersistentVolumeClaimRetentionPolicyType is a string enumeration of the policies that will determine
@@ -163,8 +161,10 @@ type ScaleStrategy struct {
 }
 
 type NamingStrategy struct {
-	// PodNamingPolicy indicates how a new pod name is generated.
-	PodNamingPolicy PodNamingPolicy `json:"podNamingPolicy,omitempty"`
+	// PodNamingSuffixPolicy is a string enumeration that determaines how pod name suffix will be generated.
+	// A collaset pod name contains two parts to be placed in a string formation %s-%s; the prefix is collaset
+	// name, and the suffix is determined by PodNamingSuffixPolicy.
+	PodNamingSuffixPolicy PodNamingSuffixPolicy `json:"podNamingSuffixPolicy,omitempty"`
 }
 
 type PersistentVolumeClaimRetentionPolicy struct {
