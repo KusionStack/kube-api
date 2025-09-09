@@ -28,17 +28,17 @@ const (
 	CollaSetUpdate CollaSetConditionType = "Update"
 )
 
-// PodNamingPolicy is a string enumeration that determaines how pod name will be generated.
+// ReplicaNamingPolicy is a string enumeration that determaines how pod name will be generated.
 // A collaset pod name contains two parts to be placed in a string formation %s-%s; the prefix
-// is name of collaset, and the suffix is determined by PodNamingPolicy.
-type PodNamingPolicy string
+// is name of collaset, and the suffix is determined by ReplicaNamingPolicy.
+type ReplicaNamingPolicy string
 
 const (
-	// PodNamingPolicyPersistentSequence uses persistent sequential numbers as pod name suffix.
-	PodNamingPolicyPersistentSequence PodNamingPolicy = "PersistentSequence"
-	// PodNamingPolicyDefault uses random strings which are provided by Kubernetes as pod name suffix.
+	// ReplicaNamingPolicyPersistentSequence uses persistent sequential numbers as pod name suffix.
+	ReplicaNamingPolicyPersistentSequence ReplicaNamingPolicy = "PersistentSequence"
+	// ReplicaNamingPolicyDefault uses random strings which are provided by Kubernetes as pod name suffix.
 	// This is defaulting value.
-	PodNamingPolicyDefault PodNamingPolicy = "Default"
+	ReplicaNamingPolicyDefault ReplicaNamingPolicy = "Default"
 )
 
 // PersistentVolumeClaimRetentionPolicyType is a string enumeration of the policies that will determine
@@ -120,6 +120,10 @@ type CollaSetSpec struct {
 	// +optional
 	ScaleStrategy ScaleStrategy `json:"scaleStrategy,omitempty"`
 
+	// NamigPolicy indicates the strategy detail that will be used for replica naming
+	// +optional
+	NamingPolicy NamingPolicy `json:"namimgPolicy,omitempty"`
+
 	// Indicate the number of histories to be conserved
 	// If unspecified, defaults to 20
 	// +optional
@@ -132,9 +136,6 @@ type ScaleStrategy struct {
 	// Context defaults to be CollaSet's name.
 	// +optional
 	Context string `json:"context,omitempty"`
-
-	// PodNamingPolicy indicates how a new pod name is generated.
-	PodNamingPolicy PodNamingPolicy `json:"podNamingPolicy,omitempty"`
 
 	// PodToExclude indicates the pods which will be orphaned by CollaSet.
 	// +optional
@@ -158,6 +159,11 @@ type ScaleStrategy struct {
 	// OperationDelaySeconds indicates how many seconds it should delay before operating scale.
 	// +optional
 	OperationDelaySeconds *int32 `json:"operationDelaySeconds,omitempty"`
+}
+
+type NamingPolicy struct {
+	// ReplicaNamingPolicy indicates how a new pod name is generated.
+	ReplicaNamingPolicy ReplicaNamingPolicy `json:"replicaNamingPolicy,omitempty"`
 }
 
 type PersistentVolumeClaimRetentionPolicy struct {
