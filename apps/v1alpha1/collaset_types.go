@@ -30,13 +30,13 @@ const (
 
 // PodNamingPolicy is a string enumeration that determaines how pod name will be generated.
 // A collaset pod name contains two parts to be placed in a string formation %s-%s; the prefix
-// is name of collaset, and the postfix is determined by PodNamingPolicy.
+// is name of collaset, and the suffix is determined by PodNamingPolicy.
 type PodNamingPolicy string
 
 const (
-	// PodNamingPolicyPersistentSequence uses persistent sequential numbers as pod name postfix.
+	// PodNamingPolicyPersistentSequence uses persistent sequential numbers as pod name suffix.
 	PodNamingPolicyPersistentSequence PodNamingPolicy = "PersistentSequence"
-	// PodNamingPolicyDefault uses random strings which are provided by Kubernetes as pod name postfix.
+	// PodNamingPolicyDefault uses random strings which are provided by Kubernetes as pod name suffix.
 	// This is defaulting value.
 	PodNamingPolicyDefault PodNamingPolicy = "Default"
 )
