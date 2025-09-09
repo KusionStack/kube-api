@@ -122,7 +122,7 @@ type CollaSetSpec struct {
 
 	// NamigPolicy indicates the strategy detail that will be used for replica naming
 	// +optional
-	NamingPolicy NamingPolicy `json:"namimgPolicy,omitempty"`
+	NamingPolicy *NamingPolicy `json:"namimgPolicy,omitempty"`
 
 	// Indicate the number of histories to be conserved
 	// If unspecified, defaults to 20

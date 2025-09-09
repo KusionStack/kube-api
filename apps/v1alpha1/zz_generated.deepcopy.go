@@ -244,7 +244,11 @@ func (in *CollaSetSpec) DeepCopyInto(out *CollaSetSpec) {
 	}
 	in.UpdateStrategy.DeepCopyInto(&out.UpdateStrategy)
 	in.ScaleStrategy.DeepCopyInto(&out.ScaleStrategy)
-	out.NamingPolicy = in.NamingPolicy
+	if in.NamingPolicy != nil {
+		in, out := &in.NamingPolicy, &out.NamingPolicy
+		*out = new(NamingPolicy)
+		**out = **in
+	}
 	return
 }
 
