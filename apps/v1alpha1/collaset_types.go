@@ -36,9 +36,9 @@ type PodNamingPolicy string
 const (
 	// PodNamingPolicyPersistentSequence uses persistent sequential numbers as pod name suffix.
 	PodNamingPolicyPersistentSequence PodNamingPolicy = "PersistentSequence"
-	// PodNamingPolicyDefault uses random strings which are provided by Kubernetes as pod name suffix.
-	// This is defaulting value.
-	PodNamingPolicyDefault PodNamingPolicy = "Default"
+	// PodNamingPolicyDefault uses generate name as prefix and a random strings which are provided
+	// by Kubernetes as pod name suffix. This is defaulting value.
+	PodNamingPolicyGenerateName PodNamingPolicy = "GenerateName"
 )
 
 // PersistentVolumeClaimRetentionPolicyType is a string enumeration of the policies that will determine
