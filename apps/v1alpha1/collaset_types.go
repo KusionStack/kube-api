@@ -28,6 +28,18 @@ const (
 	CollaSetUpdate CollaSetConditionType = "Update"
 )
 
+// PodNamingSuffixPolicy indicates how a new pod name suffix part is generated.
+type PodNamingSuffixPolicy string
+
+const (
+	// PodNamingSuffixPolicyPersistentSequence uses persistent sequential numbers as pod name suffix.
+	PodNamingSuffixPolicyPersistentSequence PodNamingSuffixPolicy = "PersistentSequence"
+	// PodNamingSuffixPolicyRandom uses collaset name as pod generateName, which is the prefix
+	// of pod name. Kubernetes then adds a random string as suffix after the generateName.
+	// This is defaulting policy.
+	PodNamingSuffixPolicyRandom PodNamingSuffixPolicy = "Random"
+)
+
 // PersistentVolumeClaimRetentionPolicyType is a string enumeration of the policies that will determine
 // which action will be applied on volumes from the VolumeClaimTemplates when the CollaSet is
 // deleted or scaled down.
@@ -107,6 +119,10 @@ type CollaSetSpec struct {
 	// +optional
 	ScaleStrategy ScaleStrategy `json:"scaleStrategy,omitempty"`
 
+	// NamigPolicy indicates the strategy detail that will be used for replica naming
+	// +optional
+	NamingStrategy *NamingStrategy `json:"namingStrategy,omitempty"`
+
 	// Indicate the number of histories to be conserved
 	// If unspecified, defaults to 20
 	// +optional
@@ -142,6 +158,13 @@ type ScaleStrategy struct {
 	// OperationDelaySeconds indicates how many seconds it should delay before operating scale.
 	// +optional
 	OperationDelaySeconds *int32 `json:"operationDelaySeconds,omitempty"`
+}
+
+type NamingStrategy struct {
+	// PodNamingSuffixPolicy is a string enumeration that determaines how pod name suffix will be generated.
+	// A collaset pod name contains two parts to be placed in a string formation %s-%s; the prefix is collaset
+	// name, and the suffix is determined by PodNamingSuffixPolicy.
+	PodNamingSuffixPolicy PodNamingSuffixPolicy `json:"podNamingSuffixPolicy,omitempty"`
 }
 
 type PersistentVolumeClaimRetentionPolicy struct {
