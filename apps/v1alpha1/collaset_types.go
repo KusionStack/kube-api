@@ -36,8 +36,9 @@ type PodNamingPolicy string
 const (
 	// PodNamingPolicyPersistentSequence uses persistent sequential numbers as pod name suffix.
 	PodNamingPolicyPersistentSequence PodNamingPolicy = "PersistentSequence"
-	// PodNamingPolicyDefault uses generate name as prefix and a random strings which are provided
-	// by Kubernetes as pod name suffix. This is defaulting value.
+	// PodNamingPolicyGenerateName uses collaset name as pod generateName, which is the prefix
+	// of pod name. Kubernetes then adds a random unique string as suffix after the generateName.
+	// This is defaulting policy.
 	PodNamingPolicyGenerateName PodNamingPolicy = "GenerateName"
 )
 
