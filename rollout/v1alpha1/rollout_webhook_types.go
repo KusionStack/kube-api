@@ -147,6 +147,10 @@ type RolloutWebhookReviewSpec struct {
 	// Batch defines the batch step webhook review spec
 	// +optional
 	Batch *RolloutWebhookReviewBatch `json:"batch,omitempty"`
+
+	// Scale defines the scale batch step webhook review spec
+	// +optional
+	Scale *ScaleWebhookReviewBatch `json:"scale,omitempty"`
 }
 
 type RolloutWebhookReviewCanary struct {
@@ -161,6 +165,15 @@ type RolloutWebhookReviewBatch struct {
 	BatchIndex int32 `json:"batchIndex,omitempty"`
 	// Targets contains the list of rollout run step targets
 	Targets []RolloutRunStepTarget `json:"targets,omitempty"`
+	// Properties stores custom parameters from the webhook to be passed to the server side
+	Properties map[string]string `json:"properties,omitempty"`
+}
+
+type ScaleWebhookReviewBatch struct {
+	// BatchIndex is the index of the executing batch
+	BatchIndex int32 `json:"batchIndex,omitempty"`
+	// Targets contains the list of scale run step targets
+	Targets []ScaleRunStepTarget `json:"targets,omitempty"`
 	// Properties stores custom parameters from the webhook to be passed to the server side
 	Properties map[string]string `json:"properties,omitempty"`
 }

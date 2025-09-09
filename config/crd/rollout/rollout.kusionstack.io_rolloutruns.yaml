@@ -4660,6 +4660,10 @@ spec:
                           description: WorkloadDetails contains release details for each workload
                           items:
                             properties:
+                              availableReplicas:
+                                description: AvailableReplicas is the number of service available pods targeted by workload.
+                                format: int32
+                                type: integer
                               cluster:
                                 description: Cluster defines which cluster the workload is in.
                                 type: string
@@ -4697,6 +4701,7 @@ spec:
                                 description: UpdatedRevision is the updated template revision used to generate pods.
                                 type: string
                             required:
+                            - availableReplicas
                             - replicas
                             - updatedAvailableReplicas
                             - updatedReadyReplicas
@@ -4758,6 +4763,10 @@ spec:
                     description: WorkloadDetails contains release details for each workload
                     items:
                       properties:
+                        availableReplicas:
+                          description: AvailableReplicas is the number of service available pods targeted by workload.
+                          format: int32
+                          type: integer
                         cluster:
                           description: Cluster defines which cluster the workload is in.
                           type: string
@@ -4795,6 +4804,7 @@ spec:
                           description: UpdatedRevision is the updated template revision used to generate pods.
                           type: string
                       required:
+                      - availableReplicas
                       - replicas
                       - updatedAvailableReplicas
                       - updatedReadyReplicas
@@ -4892,6 +4902,10 @@ spec:
                 description: TargetStatuses describes the referenced workloads status
                 items:
                   properties:
+                    availableReplicas:
+                      description: AvailableReplicas is the number of service available pods targeted by workload.
+                      format: int32
+                      type: integer
                     cluster:
                       description: Cluster defines which cluster the workload is in.
                       type: string
@@ -4929,6 +4943,7 @@ spec:
                       description: UpdatedRevision is the updated template revision used to generate pods.
                       type: string
                   required:
+                  - availableReplicas
                   - replicas
                   - updatedAvailableReplicas
                   - updatedReadyReplicas
