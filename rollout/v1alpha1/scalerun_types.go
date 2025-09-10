@@ -155,6 +155,8 @@ type ScaleWorkloadStatus struct {
 	Cluster string `json:"cluster,omitempty"`
 	// Replicas is the desired number of pods targeted by workload
 	Replicas int32 `json:"replicas"`
+	// CurrentReplicas is the number of current existed pods targeted by workload
+	CurrentReplicas int32 `json:"currentReplicas"`
 	// AvailableReplicas is the available number of pods targeted by workload
 	AvailableReplicas int32 `json:"availableReplicas"`
 	// ScaleFrom is the number of replicas to scale from.
