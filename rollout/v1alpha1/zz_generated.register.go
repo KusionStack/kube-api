@@ -67,6 +67,8 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&RolloutStrategy{},
 		&RolloutStrategyList{},
 		&RolloutWebhookReview{},
+		&ScaleRun{},
+		&ScaleRunList{},
 		&TrafficTopology{},
 		&TrafficTopologyList{},
 	)
