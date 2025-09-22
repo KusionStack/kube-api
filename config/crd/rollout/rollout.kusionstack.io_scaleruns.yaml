@@ -77,32 +77,12 @@ spec:
                         targets:
                           description: desired target replicas
                           items:
-                            description: |-
-                              ScaleRunStepTarget defines the target resource of scale
-                              Either replicas or multiReplicas must be set, but not both
+                            description: ScaleRunStepTarget defines the target resource
+                              of scale
                             properties:
                               cluster:
                                 description: Cluster indicates the name of cluster
                                 type: string
-                              multiReplicas:
-                                description: MultipleReplias is the replicas of the
-                                  scale task, which represents the replicas of different
-                                  target group resource
-                                items:
-                                  properties:
-                                    groupName:
-                                      description: GroupName is the name of current
-                                        group
-                                      type: string
-                                    value:
-                                      description: Value is the replicas of current
-                                        group
-                                      format: int32
-                                      type: integer
-                                  required:
-                                  - value
-                                  type: object
-                                type: array
                               name:
                                 description: Name is the resource name
                                 type: string
@@ -143,32 +123,12 @@ spec:
                         targets:
                           description: desired target replicas
                           items:
-                            description: |-
-                              ScaleRunStepTarget defines the target resource of scale
-                              Either replicas or multiReplicas must be set, but not both
+                            description: ScaleRunStepTarget defines the target resource
+                              of scale
                             properties:
                               cluster:
                                 description: Cluster indicates the name of cluster
                                 type: string
-                              multiReplicas:
-                                description: MultipleReplias is the replicas of the
-                                  scale task, which represents the replicas of different
-                                  target group resource
-                                items:
-                                  properties:
-                                    groupName:
-                                      description: GroupName is the name of current
-                                        group
-                                      type: string
-                                    value:
-                                      description: Value is the replicas of current
-                                        group
-                                      format: int32
-                                      type: integer
-                                  required:
-                                  - value
-                                  type: object
-                                type: array
                               name:
                                 description: Name is the resource name
                                 type: string

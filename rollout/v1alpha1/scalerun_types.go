@@ -83,15 +83,11 @@ type ScaleRunStep struct {
 }
 
 // ScaleRunStepTarget defines the target resource of scale
-// Either replicas or multiReplicas must be set, but not both
 type ScaleRunStepTarget struct {
 	CrossClusterObjectNameReference `json:",inline"`
 
 	// Replicas is the replicas of the scale task, which represents the replicas of the target resource
 	Replicas int32 `json:"replicas"`
-
-	// MultipleReplias is the replicas of the scale task, which represents the replicas of different target group resource
-	MultipleReplias []MultipleReplia `json:"multiReplicas,omitempty"`
 }
 
 type MultipleReplia struct {

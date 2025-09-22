@@ -1875,9 +1875,7 @@ func (in *ScaleRunStep) DeepCopyInto(out *ScaleRunStep) {
 	if in.Targets != nil {
 		in, out := &in.Targets, &out.Targets
 		*out = make([]ScaleRunStepTarget, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		copy(*out, *in)
 	}
 	if in.Properties != nil {
 		in, out := &in.Properties, &out.Properties
@@ -1942,11 +1940,6 @@ func (in *ScaleRunStepStatus) DeepCopy() *ScaleRunStepStatus {
 func (in *ScaleRunStepTarget) DeepCopyInto(out *ScaleRunStepTarget) {
 	*out = *in
 	out.CrossClusterObjectNameReference = in.CrossClusterObjectNameReference
-	if in.MultipleReplias != nil {
-		in, out := &in.MultipleReplias, &out.MultipleReplias
-		*out = make([]MultipleReplia, len(*in))
-		copy(*out, *in)
-	}
 	return
 }
 
