@@ -237,4 +237,7 @@ const (
 	// In Canary strategy, it occurs after the user confirms (Paused).
 	// In Batch strategy, it occurs before the PreBatchStepHook.
 	RolloutStepResourceRecycling RolloutStepState = "ResourceRecycling"
+
+	// RolloutStepSkipped indicates that the step is skipped.
+	RolloutStepSkipped RolloutStepState = "Skipped"
 )
