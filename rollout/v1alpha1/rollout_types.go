@@ -179,6 +179,7 @@ type RolloutReplicasSummary struct {
 	// Replicas is the desired number of pods targeted by workload
 	Replicas int32 `json:"replicas"`
 	// AvailableReplicas is the number of service available pods targeted by workload.
+	// +optional
 	AvailableReplicas int32 `json:"availableReplicas"`
 	// UpdatedReplicas is the number of pods targeted by workload that have the updated template spec.
 	UpdatedReplicas int32 `json:"updatedReplicas"`

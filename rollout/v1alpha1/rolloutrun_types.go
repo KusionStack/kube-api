@@ -207,6 +207,12 @@ type RolloutWebhookStatus struct {
 	HookType HookType `json:"hookType,omitempty"`
 	// Webhook Name
 	Name string `json:"name,omitempty"`
+	// StartTime is the time when the hook started
+	// +optional
+	StartTime *metav1.Time `json:"startTime,omitempty"`
+	// FinishTime is the time when the hook finished
+	// +optional
+	FinishTime *metav1.Time `json:"finishTime,omitempty"`
 	// Webhook result
 	CodeReasonMessage `json:",inline"`
 	// Failure count
