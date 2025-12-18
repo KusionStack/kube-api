@@ -123,6 +123,10 @@ type RolloutStatus struct {
 	LastUpdateTime *metav1.Time `json:"lastUpdateTime,omitempty"`
 	// RolloutID is reference to rolloutRun name.
 	RolloutID string `json:"rolloutID,omitempty"`
+
+	// WorkloadStatuses describes the referenced workloads status
+	// +optional
+	WorkloadStatuses []RolloutWorkloadStatus `json:"workloadStatuses,omitempty"`
 }
 
 // RolloutPhase indicates the current rollout phase
