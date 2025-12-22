@@ -123,6 +123,10 @@ type RolloutStatus struct {
 	LastUpdateTime *metav1.Time `json:"lastUpdateTime,omitempty"`
 	// RolloutID is reference to rolloutRun name.
 	RolloutID string `json:"rolloutID,omitempty"`
+
+	// WorkloadStatuses describes the referenced workloads status
+	// +optional
+	WorkloadStatuses []RolloutWorkloadStatus `json:"workloadStatuses,omitempty"`
 }
 
 // RolloutPhase indicates the current rollout phase
@@ -177,15 +181,19 @@ type RolloutBatchStatus struct {
 
 type RolloutReplicasSummary struct {
 	// Replicas is the desired number of pods targeted by workload
+	// +optional
 	Replicas int32 `json:"replicas"`
 	// AvailableReplicas is the number of service available pods targeted by workload.
 	// +optional
 	AvailableReplicas int32 `json:"availableReplicas"`
 	// UpdatedReplicas is the number of pods targeted by workload that have the updated template spec.
+	// +optional
 	UpdatedReplicas int32 `json:"updatedReplicas"`
 	// UpdatedReadyReplicas is the number of ready pods targeted by workload that have the updated template spec.
+	// +optional
 	UpdatedReadyReplicas int32 `json:"updatedReadyReplicas"`
 	// UpdatedAvailableReplicas is the number of service available pods targeted by workload that have the updated template spec.
+	// +optional
 	UpdatedAvailableReplicas int32 `json:"updatedAvailableReplicas"`
 }
 

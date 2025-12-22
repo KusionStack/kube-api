@@ -4700,11 +4700,6 @@ spec:
                               updatedRevision:
                                 description: UpdatedRevision is the updated template revision used to generate pods.
                                 type: string
-                            required:
-                            - replicas
-                            - updatedAvailableReplicas
-                            - updatedReadyReplicas
-                            - updatedReplicas
                             type: object
                           type: array
                         webhooks:
@@ -4810,11 +4805,6 @@ spec:
                         updatedRevision:
                           description: UpdatedRevision is the updated template revision used to generate pods.
                           type: string
-                      required:
-                      - replicas
-                      - updatedAvailableReplicas
-                      - updatedReadyReplicas
-                      - updatedReplicas
                       type: object
                     type: array
                   webhooks:
@@ -4956,11 +4946,6 @@ spec:
                     updatedRevision:
                       description: UpdatedRevision is the updated template revision used to generate pods.
                       type: string
-                  required:
-                  - replicas
-                  - updatedAvailableReplicas
-                  - updatedReadyReplicas
-                  - updatedReplicas
                   type: object
                 type: array
             type: object

@@ -1326,6 +1326,11 @@ func (in *RolloutStatus) DeepCopyInto(out *RolloutStatus) {
 		in, out := &in.LastUpdateTime, &out.LastUpdateTime
 		*out = (*in).DeepCopy()
 	}
+	if in.WorkloadStatuses != nil {
+		in, out := &in.WorkloadStatuses, &out.WorkloadStatuses
+		*out = make([]RolloutWorkloadStatus, len(*in))
+		copy(*out, *in)
+	}
 	return
 }
 
