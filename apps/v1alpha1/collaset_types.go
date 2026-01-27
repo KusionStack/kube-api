@@ -263,6 +263,10 @@ type CollaSetStatus struct {
 	// +optional
 	OperatingReplicas int32 `json:"operatingReplicas,omitempty"`
 
+	// TerminatingReplicas indicates the number of replicas with deletionTimestamps.
+	// +optional
+	TerminatingReplicas int32 `json:"terminatingReplicas,omitempty"`
+
 	// UpdatedReadyReplicas indicates the number of the pod with updated revision and ready condition
 	// +optional
 	UpdatedReadyReplicas int32 `json:"updatedReadyReplicas,omitempty"`
