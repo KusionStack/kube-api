@@ -1293,6 +1293,16 @@ func (in *RolloutSpec) DeepCopyInto(out *RolloutSpec) {
 		*out = new(int32)
 		**out = **in
 	}
+	if in.CanaryStrategy != nil {
+		in, out := &in.CanaryStrategy, &out.CanaryStrategy
+		*out = new(RolloutRunCanaryStrategy)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BatchStrategy != nil {
+		in, out := &in.BatchStrategy, &out.BatchStrategy
+		*out = new(RolloutRunBatchStrategy)
+		(*in).DeepCopyInto(*out)
+	}
 	in.WorkloadRef.DeepCopyInto(&out.WorkloadRef)
 	if in.TrafficTopologyRefs != nil {
 		in, out := &in.TrafficTopologyRefs, &out.TrafficTopologyRefs

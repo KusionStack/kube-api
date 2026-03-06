@@ -70,10 +70,28 @@ type RolloutSpec struct {
 	// +kubebuilder:default=Auto
 	TriggerPolicy RolloutTriggerPolicy `json:"triggerPolicy,omitempty"`
 
-	// StrategyRef is the reference to the rollout strategy
+	// StrategyRef is the reference to the rollout strategy.
+	// Mutually exclusive with CanaryStrategy and BatchStrategy.
+	// If specified, CanaryStrategy and BatchStrategy must be empty.
 	//
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	StrategyRef string `json:"strategyRef,omitempty"`
+
+	// CanaryStrategy defines the inline canary strategy.
+	// This allows specifying canary deployment details directly in Rollout
+	// without requiring a separate RolloutStrategy resource.
+	// Mutually exclusive with StrategyRef.
+	//
+	// +kubebuilder:validation:Optional
+	CanaryStrategy *RolloutRunCanaryStrategy `json:"canaryStrategy,omitempty"`
+
+	// BatchStrategy defines the inline batch strategy.
+	// This allows specifying batch deployment details directly in Rollout
+	// without requiring a separate RolloutStrategy resource.
+	// Mutually exclusive with StrategyRef.
+	//
+	// +kubebuilder:validation:Optional
+	BatchStrategy *RolloutRunBatchStrategy `json:"batchStrategy,omitempty"`
 
 	// WorkloadRef is a reference to a kind of workloads
 	WorkloadRef WorkloadRef `json:"workloadRef,omitempty"`
