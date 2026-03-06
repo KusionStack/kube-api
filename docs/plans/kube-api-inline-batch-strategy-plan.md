@@ -14,7 +14,7 @@
 
 **目标**: 在 RolloutSpec 中添加 CanaryStrategy 和 BatchStrategy 内联字段
 
-**文件**: `apis/rollout/v1alpha1/types.go`
+**文件**: `rollout/v1alpha1/rollout_types.go`
 
 **改动内容**:
 

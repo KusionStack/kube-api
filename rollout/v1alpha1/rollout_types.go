@@ -51,6 +51,9 @@ type RolloutList struct {
 	Items           []Rollout `json:"items"`
 }
 
+// +kubebuilder:validation:XValidation:message="StrategyRef is mutually exclusive with CanaryStrategy",rule="!has(self.strategyRef) || !has(self.canaryStrategy)"
+// +kubebuilder:validation:XValidation:message="StrategyRef is mutually exclusive with BatchStrategy",rule="!has(self.strategyRef) || !has(self.batchStrategy)"
+
 // RolloutSpec defines the desired state of Rollout
 type RolloutSpec struct {
 	// Disabled means that rollout will not response for new event.
