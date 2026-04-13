@@ -1303,6 +1303,13 @@ func (in *RolloutSpec) DeepCopyInto(out *RolloutSpec) {
 		*out = new(RolloutRunBatchStrategy)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Webhooks != nil {
+		in, out := &in.Webhooks, &out.Webhooks
+		*out = make([]RolloutWebhook, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	in.WorkloadRef.DeepCopyInto(&out.WorkloadRef)
 	if in.TrafficTopologyRefs != nil {
 		in, out := &in.TrafficTopologyRefs, &out.TrafficTopologyRefs

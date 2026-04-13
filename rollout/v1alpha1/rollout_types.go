@@ -96,6 +96,9 @@ type RolloutSpec struct {
 	// +kubebuilder:validation:Optional
 	BatchStrategy *RolloutRunBatchStrategy `json:"batchStrategy,omitempty"`
 
+	// Webhooks defines rollout webhook configuration
+	Webhooks []RolloutWebhook `json:"webhooks,omitempty"`
+
 	// WorkloadRef is a reference to a kind of workloads
 	WorkloadRef WorkloadRef `json:"workloadRef,omitempty"`
 
