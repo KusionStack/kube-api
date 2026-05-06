@@ -51,9 +51,6 @@ type RolloutList struct {
 	Items           []Rollout `json:"items"`
 }
 
-// +kubebuilder:validation:XValidation:message="StrategyRef is mutually exclusive with CanaryStrategy",rule="!has(self.strategyRef) || !has(self.canaryStrategy)"
-// +kubebuilder:validation:XValidation:message="StrategyRef is mutually exclusive with BatchStrategy",rule="!has(self.strategyRef) || !has(self.batchStrategy)"
-
 // RolloutSpec defines the desired state of Rollout
 type RolloutSpec struct {
 	// Disabled means that rollout will not response for new event.
@@ -74,30 +71,8 @@ type RolloutSpec struct {
 	TriggerPolicy RolloutTriggerPolicy `json:"triggerPolicy,omitempty"`
 
 	// StrategyRef is the reference to the rollout strategy.
-	// Mutually exclusive with CanaryStrategy and BatchStrategy.
-	// If specified, CanaryStrategy and BatchStrategy must be empty.
-	//
-	// +kubebuilder:validation:Optional
+	// +kubebuilder:validation:Required
 	StrategyRef string `json:"strategyRef,omitempty"`
-
-	// CanaryStrategy defines the inline canary strategy.
-	// This allows specifying canary deployment details directly in Rollout
-	// without requiring a separate RolloutStrategy resource.
-	// Mutually exclusive with StrategyRef.
-	//
-	// +kubebuilder:validation:Optional
-	CanaryStrategy *RolloutRunCanaryStrategy `json:"canaryStrategy,omitempty"`
-
-	// BatchStrategy defines the inline batch strategy.
-	// This allows specifying batch deployment details directly in Rollout
-	// without requiring a separate RolloutStrategy resource.
-	// Mutually exclusive with StrategyRef.
-	//
-	// +kubebuilder:validation:Optional
-	BatchStrategy *RolloutRunBatchStrategy `json:"batchStrategy,omitempty"`
-
-	// Webhooks defines rollout webhook configuration
-	Webhooks []RolloutWebhook `json:"webhooks,omitempty"`
 
 	// WorkloadRef is a reference to a kind of workloads
 	WorkloadRef WorkloadRef `json:"workloadRef,omitempty"`

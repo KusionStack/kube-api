@@ -41,6 +41,18 @@ type RolloutStrategy struct {
 	// +optional
 	Batch *BatchStrategy `json:"batch,omitempty"`
 
+	// CanaryV2 defines the canary strategy for upgrade and operation
+	// Mutually exclusive with Canary.
+	// If specified, Canary must be empty.
+	// +optional
+	CanaryV2 *CanaryStrategyV2 `json:"canaryV2,omitempty"`
+
+	// BatchV2 is the batch strategy for upgrade and operation
+	// Mutually exclusive with Batch.
+	// If specified, Batch must be empty.
+	// +optional
+	BatchV2 *BatchStrategyV2 `json:"batchV2,omitempty"`
+
 	// Webhooks defines
 	// +optional
 	Webhooks []RolloutWebhook `json:"webhooks,omitempty"`
@@ -61,6 +73,16 @@ type RolloutStrategyList struct {
 type BatchStrategy struct {
 	// Batches define the order of phases to execute release in canary release
 	Batches []RolloutStep `json:"batches,omitempty"`
+
+	// Toleration is the toleration policy of the canary strategy
+	// +optional
+	Toleration *TolerationStrategy `json:"toleration,omitempty"`
+}
+
+// BatchStrategyV2 defines the v2 batch strategy
+type BatchStrategyV2 struct {
+	// Batches define the order of phases to execute release in canary release
+	Batches []RolloutBatchStep `json:"batches,omitempty"`
 
 	// Toleration is the toleration policy of the canary strategy
 	// +optional
@@ -112,6 +134,23 @@ type RolloutStep struct {
 	Properties map[string]string `json:"properties,omitempty"`
 }
 
+type RolloutBatchStep struct {
+	// rollout targets defines desired target replicas
+	Targets []RolloutTargets `json:"targets"`
+
+	// traffic strategy
+	// +optional
+	Traffic *TrafficStrategy `json:"traffic,omitempty"`
+
+	// If set to true, the rollout will be paused before the step starts.
+	// +optional
+	Breakpoint bool `json:"breakpoint,omitempty"`
+
+	// Properties contains additional information for step
+	// +optional
+	Properties map[string]string `json:"properties,omitempty"`
+}
+
 type CanaryStrategy struct {
 	// Replicas is the replicas of the rollout task, which represents the number of pods to be upgraded
 	Replicas intstr.IntOrString `json:"replicas"`
@@ -131,4 +170,35 @@ type CanaryStrategy struct {
 	// TemplateMetadataPatch defines a patch for workload template metadata.
 	// +optional
 	TemplateMetadataPatch *MetadataPatch `json:"templateMetadataPatch,omitempty"`
+}
+
+type CanaryStrategyV2 struct {
+	// rollout targets defines desired target replicas
+	Targets []RolloutTargets `json:"targets"`
+
+	// traffic strategy
+	// +optional
+	Traffic *TrafficStrategy `json:"traffic,omitempty"`
+
+	// Properties contains additional information for step
+	// +optional
+	Properties map[string]string `json:"properties,omitempty"`
+
+	// TemplateMetadataPatch defines a patch for workload template metadata.
+	// +optional
+	TemplateMetadataPatch *MetadataPatch `json:"templateMetadataPatch,omitempty"`
+}
+
+type RolloutTargets struct {
+	// Replicas is the replicas of the rollout task, which represents the number of pods to be upgraded
+	Replicas intstr.IntOrString `json:"replicas"`
+
+	// ReplicaSlidingWindow used to control the number of pods that are allowed to be upgraded in
+	// a sliding window for progressive rollout smoothly.
+	// +optional
+	ReplicaSlidingWindow *intstr.IntOrString `json:"replicaSlidingWindow,omitempty"`
+
+	// Match defines condition used for matching resource cross clusterset
+	// +optional
+	Match *ResourceMatch `json:"matchTargets,omitempty"`
 }
