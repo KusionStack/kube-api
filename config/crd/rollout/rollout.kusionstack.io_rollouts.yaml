@@ -70,7 +70,7 @@ spec:
                 format: int32
                 type: integer
               strategyRef:
-                description: StrategyRef is the reference to the rollout strategy
+                description: StrategyRef is the reference to the rollout strategy.
                 type: string
               trafficTopologyRefs:
                 description: |-

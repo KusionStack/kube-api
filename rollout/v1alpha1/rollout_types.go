@@ -70,8 +70,7 @@ type RolloutSpec struct {
 	// +kubebuilder:default=Auto
 	TriggerPolicy RolloutTriggerPolicy `json:"triggerPolicy,omitempty"`
 
-	// StrategyRef is the reference to the rollout strategy
-	//
+	// StrategyRef is the reference to the rollout strategy.
 	// +kubebuilder:validation:Required
 	StrategyRef string `json:"strategyRef,omitempty"`
 
