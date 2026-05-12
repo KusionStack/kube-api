@@ -82,11 +82,7 @@ type BatchStrategy struct {
 // BatchStrategyV2 defines the v2 batch strategy
 type BatchStrategyV2 struct {
 	// Batches define the order of phases to execute release in canary release
-	Batches []RolloutBatchStep `json:"batches,omitempty"`
-
-	// Toleration is the toleration policy of the canary strategy
-	// +optional
-	Toleration *TolerationStrategy `json:"toleration,omitempty"`
+	Batches []RolloutBatchStrategyStep `json:"batches,omitempty"`
 }
 
 // TolerationStrategy defines the toleration strategy
@@ -134,9 +130,9 @@ type RolloutStep struct {
 	Properties map[string]string `json:"properties,omitempty"`
 }
 
-type RolloutBatchStep struct {
+type RolloutBatchStrategyStep struct {
 	// rollout targets defines desired target replicas
-	Targets []RolloutTargets `json:"targets"`
+	Targets []RolloutStrategyTargets `json:"targets"`
 
 	// traffic strategy
 	// +optional
@@ -174,7 +170,7 @@ type CanaryStrategy struct {
 
 type CanaryStrategyV2 struct {
 	// rollout targets defines desired target replicas
-	Targets []RolloutTargets `json:"targets"`
+	Targets []RolloutStrategyTargets `json:"targets"`
 
 	// traffic strategy
 	// +optional
@@ -189,7 +185,7 @@ type CanaryStrategyV2 struct {
 	TemplateMetadataPatch *MetadataPatch `json:"templateMetadataPatch,omitempty"`
 }
 
-type RolloutTargets struct {
+type RolloutStrategyTargets struct {
 	// Replicas is the replicas of the rollout task, which represents the number of pods to be upgraded
 	Replicas intstr.IntOrString `json:"replicas"`
 
