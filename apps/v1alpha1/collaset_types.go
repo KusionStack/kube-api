@@ -56,6 +56,16 @@ const (
 	DeletePersistentVolumeClaimRetentionPolicyType PersistentVolumeClaimRetentionPolicyType = "Delete"
 )
 
+// HostnamePolicyType indicates how the pod's hostname is determined.
+type HostnamePolicyType string
+
+const (
+	// HostnamePolicyPodName sets the pod's hostname to the pod name.
+	// This requires namingStrategy.podNamingSuffixPolicy to be PersistentSequence,
+	// as the pod name must be deterministic before creation.
+	HostnamePolicyPodName HostnamePolicyType = "PodName"
+)
+
 // PodUpdateStrategyType is a string enumeration type that enumerates
 // all possible ways we can update a Pod when updating application
 type PodUpdateStrategyType string
@@ -122,6 +132,12 @@ type CollaSetSpec struct {
 	// NamigPolicy indicates the strategy detail that will be used for replica naming
 	// +optional
 	NamingStrategy *NamingStrategy `json:"namingStrategy,omitempty"`
+
+	// HostnamePolicy indicates how the pod's hostname is determined.
+	// When set to "PodName", the pod's spec.hostname will be set to the pod name.
+	// This requires NamingStrategy.PodNamingSuffixPolicy to be PersistentSequence.
+	// +optional
+	HostnamePolicy HostnamePolicyType `json:"hostnamePolicy,omitempty"`
 
 	// Indicate the number of histories to be conserved
 	// If unspecified, defaults to 20
