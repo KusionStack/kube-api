@@ -86,10 +86,10 @@ spec:
               hostnamePolicy:
                 description: |-
                   HostnamePolicy indicates how the pod's hostname is determined.
+                  When unset (nil), no hostname policy is applied.
                   When set to "PodName", the pod's spec.hostname will be set to the pod name.
                   This requires NamingStrategy.PodNamingSuffixPolicy to be PersistentSequence.
                 enum:
-                - None
                 - PodName
                 type: string
               namingStrategy:

@@ -57,12 +57,10 @@ const (
 )
 
 // HostnamePolicyType indicates how the pod's hostname is determined.
-// +kubebuilder:validation:Enum=None;PodName
+// +kubebuilder:validation:Enum=PodName
 type HostnamePolicyType string
 
 const (
-	// HostnamePolicyNone means no hostname policy is applied.
-	HostnamePolicyNone HostnamePolicyType = "None"
 	// HostnamePolicyPodName sets the pod's hostname to the pod name.
 	// This requires namingStrategy.podNamingSuffixPolicy to be PersistentSequence,
 	// as the pod name must be deterministic before creation.
@@ -140,6 +138,7 @@ type CollaSetSpec struct {
 	NamingStrategy *NamingStrategy `json:"namingStrategy,omitempty"`
 
 	// HostnamePolicy indicates how the pod's hostname is determined.
+	// When unset (nil), no hostname policy is applied.
 	// When set to "PodName", the pod's spec.hostname will be set to the pod name.
 	// This requires NamingStrategy.PodNamingSuffixPolicy to be PersistentSequence.
 	// +optional
