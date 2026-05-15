@@ -66,6 +66,9 @@ const (
 	// HostnamePolicyPodName sets the pod's hostname to the pod name.
 	// This requires namingStrategy.podNamingSuffixPolicy to be PersistentSequence,
 	// as the pod name must be deterministic before creation.
+	// The resulting pod name must also be a valid Kubernetes hostname label:
+	// a single RFC 1123 DNS label containing no dots and no more than 63 characters.
+	// Otherwise the Pod will be rejected by the API server when the hostname is set.
 	HostnamePolicyPodName HostnamePolicyType = "PodName"
 )
 
