@@ -249,6 +249,11 @@ func (in *CollaSetSpec) DeepCopyInto(out *CollaSetSpec) {
 		*out = new(NamingStrategy)
 		**out = **in
 	}
+	if in.HostnamePolicy != nil {
+		in, out := &in.HostnamePolicy, &out.HostnamePolicy
+		*out = new(HostnamePolicyType)
+		**out = **in
+	}
 	return
 }
 

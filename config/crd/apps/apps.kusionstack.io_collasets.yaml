@@ -88,6 +88,9 @@ spec:
                   HostnamePolicy indicates how the pod's hostname is determined.
                   When set to "PodName", the pod's spec.hostname will be set to the pod name.
                   This requires NamingStrategy.PodNamingSuffixPolicy to be PersistentSequence.
+                enum:
+                - None
+                - PodName
                 type: string
               namingStrategy:
                 description: NamigPolicy indicates the strategy detail that will be
