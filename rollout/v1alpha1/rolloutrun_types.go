@@ -151,11 +151,27 @@ type RolloutRunStatus struct {
 	TargetStatuses []RolloutWorkloadStatus `json:"targetStatuses,omitempty"`
 }
 
+// WorkloadSkipToleration records the toleration value accumulated from skipped batches for a specific workload.
+type WorkloadSkipToleration struct {
+	// Cluster defines which cluster the workload is in.
+	Cluster string `json:"cluster,omitempty"`
+	// Name is the workload name.
+	Name string `json:"name,omitempty"`
+	// Toleration is the accumulated toleration value from skipped batches.
+	// It represents how many replicas the workload is allowed to be short of.
+	Toleration int32 `json:"toleration"`
+}
+
 type RolloutRunBatchStatus struct {
 	// RolloutBatchStatus contains status of current batch
 	RolloutBatchStatus `json:",inline"`
 	// Records contains all batches status details.
 	Records []RolloutRunStepStatus `json:"records,omitempty"`
+	// SkipTolerations records the accumulated toleration from skipped batches per workload.
+	// When a batch is skipped, the gap between expected and actual replicas for each workload
+	// is accumulated into this field, allowing subsequent batches to tolerate the deficit.
+	// +optional
+	SkipTolerations []WorkloadSkipToleration `json:"skipTolerations,omitempty"`
 }
 
 type RolloutRunPhase string
