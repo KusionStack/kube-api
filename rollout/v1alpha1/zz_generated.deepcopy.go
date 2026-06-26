@@ -1084,11 +1084,6 @@ func (in *RolloutRunBatchStatus) DeepCopyInto(out *RolloutRunBatchStatus) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.SkipTolerations != nil {
-		in, out := &in.SkipTolerations, &out.SkipTolerations
-		*out = make([]WorkloadSkipToleration, len(*in))
-		copy(*out, *in)
-	}
 	return
 }
 
@@ -1112,10 +1107,10 @@ func (in *RolloutRunBatchStrategy) DeepCopyInto(out *RolloutRunBatchStrategy) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.Toleration != nil {
-		in, out := &in.Toleration, &out.Toleration
-		*out = new(TolerationStrategy)
-		(*in).DeepCopyInto(*out)
+	if in.SkipTolerations != nil {
+		in, out := &in.SkipTolerations, &out.SkipTolerations
+		*out = make([]WorkloadSkipToleration, len(*in))
+		copy(*out, *in)
 	}
 	return
 }
