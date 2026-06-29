@@ -76,9 +76,11 @@ type RolloutRunBatchStrategy struct {
 	// Batches define the order of phases to execute release in batch release
 	Batches []RolloutRunStep `json:"batches,omitempty"`
 
-	// Toleration is the toleration policy of the canary strategy
+	// Tolerations records the accumulated toleration from skipped batches per workload.
+	// When a batch is skipped, the gap between expected and actual replicas for each workload
+	// is accumulated into this field, allowing subsequent batches to tolerate the deficit.
 	// +optional
-	Toleration *TolerationStrategy `json:"toleration,omitempty"`
+	Tolerations []RolloutRunTolerationTarget `json:"tolerations,omitempty"`
 }
 
 type RolloutRunStep struct {
@@ -149,6 +151,15 @@ type RolloutRunStatus struct {
 	// TargetStatuses describes the referenced workloads status
 	// +optional
 	TargetStatuses []RolloutWorkloadStatus `json:"targetStatuses,omitempty"`
+}
+
+// RolloutRunTolerationTarget records the toleration value accumulated from skipped batches for a specific workload.
+type RolloutRunTolerationTarget struct {
+	CrossClusterObjectNameReference `json:",inline"`
+
+	// Toleration is the accumulated toleration value from skipped batches.
+	// It represents how many replicas the workload is allowed to be short of.
+	Toleration int32 `json:"toleration"`
 }
 
 type RolloutRunBatchStatus struct {
