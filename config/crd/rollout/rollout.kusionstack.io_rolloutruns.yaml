@@ -2264,19 +2264,19 @@ spec:
                       - targets
                       type: object
                     type: array
-                  skipTolerations:
+                  tolerations:
                     description: |-
-                      SkipTolerations records the accumulated toleration from skipped batches per workload.
+                      Tolerations records the accumulated toleration from skipped batches per workload.
                       When a batch is skipped, the gap between expected and actual replicas for each workload
                       is accumulated into this field, allowing subsequent batches to tolerate the deficit.
                     items:
-                      description: WorkloadSkipToleration records the toleration value accumulated from skipped batches for a specific workload.
+                      description: RolloutRunTolerationTarget records the toleration value accumulated from skipped batches for a specific workload.
                       properties:
                         cluster:
-                          description: Cluster defines which cluster the workload is in.
+                          description: Cluster indicates the name of cluster
                           type: string
                         name:
-                          description: Name is the workload name.
+                          description: Name is the resource name
                           type: string
                         toleration:
                           description: |-
@@ -2285,6 +2285,7 @@ spec:
                           format: int32
                           type: integer
                       required:
+                      - name
                       - toleration
                       type: object
                     type: array
