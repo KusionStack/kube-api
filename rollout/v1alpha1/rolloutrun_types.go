@@ -127,6 +127,12 @@ type RolloutRunStepTarget struct {
 	// a sliding window for progressive rollout smoothly.
 	// +optional
 	ReplicaSlidingWindow *intstr.IntOrString `json:"replicaSlidingWindow,omitempty"`
+
+	// Toleration defines the toleration config for this workload.
+	// When set, if the number of unhealthy pods is within the FailureThreshold
+	// and the InitialDelaySeconds has elapsed, this batch can be auto-skipped.
+	// +optional
+	Toleration *RolloutStepTargetToleration `json:"toleration,omitempty"`
 }
 
 type RolloutRunStatus struct {

@@ -100,6 +100,25 @@ spec:
                                 - type: string
                                 description: Replicas is the replicas of the rollout task, which represents the number of pods to be upgraded
                                 x-kubernetes-int-or-string: true
+                              toleration:
+                                description: |-
+                                  Toleration defines the toleration config for this workload.
+                                  When set, if the number of unhealthy pods is within the FailureThreshold
+                                  and the InitialDelaySeconds has elapsed, this batch can be auto-skipped.
+                                properties:
+                                  failureThreshold:
+                                    description: |-
+                                      FailureThreshold is the maximum number of unhealthy pods that can be tolerated for this workload.
+                                      This is a cumulative threshold: it represents the total allowable unhealthy pods up to the current batch.
+                                      When set, if the number of unhealthy pods (expected - updatedAvailable) is <= this threshold
+                                      and the InitialDelaySeconds has elapsed, the batch can be auto-skipped.
+                                    format: int32
+                                    type: integer
+                                  initialDelaySeconds:
+                                    description: InitialDelaySeconds is the number of seconds to wait before the toleration check can trigger auto-skip.
+                                    format: int32
+                                    type: integer
+                                type: object
                             required:
                             - name
                             - replicas
@@ -2336,6 +2355,25 @@ spec:
                           - type: string
                           description: Replicas is the replicas of the rollout task, which represents the number of pods to be upgraded
                           x-kubernetes-int-or-string: true
+                        toleration:
+                          description: |-
+                            Toleration defines the toleration config for this workload.
+                            When set, if the number of unhealthy pods is within the FailureThreshold
+                            and the InitialDelaySeconds has elapsed, this batch can be auto-skipped.
+                          properties:
+                            failureThreshold:
+                              description: |-
+                                FailureThreshold is the maximum number of unhealthy pods that can be tolerated for this workload.
+                                This is a cumulative threshold: it represents the total allowable unhealthy pods up to the current batch.
+                                When set, if the number of unhealthy pods (expected - updatedAvailable) is <= this threshold
+                                and the InitialDelaySeconds has elapsed, the batch can be auto-skipped.
+                              format: int32
+                              type: integer
+                            initialDelaySeconds:
+                              description: InitialDelaySeconds is the number of seconds to wait before the toleration check can trigger auto-skip.
+                              format: int32
+                              type: integer
+                          type: object
                       required:
                       - name
                       - replicas
@@ -4737,6 +4775,28 @@ spec:
                                 type: string
                             type: object
                           type: array
+                      type: object
+                    type: array
+                  tolerations:
+                    description: Tolerations records the toleration state from skipped batches per workload.
+                    items:
+                      description: RolloutRunTolerationTarget records the toleration value accumulated from skipped batches for a specific workload.
+                      properties:
+                        cluster:
+                          description: Cluster indicates the name of cluster
+                          type: string
+                        name:
+                          description: Name is the resource name
+                          type: string
+                        toleration:
+                          description: |-
+                            Toleration is the accumulated toleration value from skipped batches.
+                            It represents how many replicas the workload is allowed to be short of.
+                          format: int32
+                          type: integer
+                      required:
+                      - name
+                      - toleration
                       type: object
                     type: array
                 required:

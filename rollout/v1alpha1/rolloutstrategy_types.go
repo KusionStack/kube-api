@@ -197,4 +197,10 @@ type RolloutStrategyTargets struct {
 	// Match defines condition used for matching resource cross clusterset
 	// +optional
 	Match *ResourceMatch `json:"matchTargets,omitempty"`
+
+	// Toleration defines the toleration config for this workload.
+	// When set, if the number of unhealthy pods is within the FailureThreshold
+	// and the InitialDelaySeconds has elapsed, this batch can be auto-skipped.
+	// +optional
+	Toleration *RolloutStepTargetToleration `json:"toleration,omitempty"`
 }
