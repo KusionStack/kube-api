@@ -88,6 +88,13 @@ type ScaleRunStepTarget struct {
 
 	// Replicas is the replicas of the scale task, which represents the replicas of the target resource
 	Replicas int32 `json:"replicas"`
+
+	// Toleration defines the toleration config for this workload.
+	// Only effective for scale-up scenarios (ScaleFrom < ScaleTo).
+	// When set, if the number of unhealthy pods is within the FailureThreshold
+	// and the InitialDelaySeconds has elapsed, this batch can be auto-skipped.
+	// +optional
+	Toleration *RolloutStepTargetToleration `json:"toleration,omitempty"`
 }
 
 type MultipleReplia struct {

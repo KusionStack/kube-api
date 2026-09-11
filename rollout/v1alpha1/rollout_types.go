@@ -170,12 +170,31 @@ const (
 	RolloutReasonProgressingError = "Error"
 )
 
+// RolloutStepTargetToleration defines the toleration config for a single workload in a batch step.
+// When the number of unhealthy pods is within the FailureThreshold, and the InitialDelaySeconds
+// has elapsed, the batch step can be automatically skipped.
+type RolloutStepTargetToleration struct {
+	// FailureThreshold is the maximum number of unhealthy pods that can be tolerated for this workload.
+	// This is a cumulative threshold: it represents the total allowable unhealthy pods up to the current batch.
+	// When set, if the number of unhealthy pods (expected - updatedAvailable) is <= this threshold
+	// and the InitialDelaySeconds has elapsed, the batch can be auto-skipped.
+	// +optional
+	FailureThreshold *int32 `json:"failureThreshold,omitempty"`
+
+	// InitialDelaySeconds is the number of seconds to wait before the toleration check can trigger auto-skip.
+	// +optional
+	InitialDelaySeconds *int32 `json:"initialDelaySeconds,omitempty"`
+}
+
 // RolloutBatchStatus defines the status of batch release.
 type RolloutBatchStatus struct {
 	// CurrentBatchIndex defines the current batch index of batch release progress.
 	CurrentBatchIndex int32 `json:"currentBatchIndex"`
 	// CurrentBatchState indicates the current batch state.
 	CurrentBatchState RolloutStepState `json:"currentBatchState,omitempty"`
+	// Tolerations records the toleration state from skipped batches per workload.
+	// +optional
+	Tolerations []RolloutRunTolerationTarget `json:"tolerations,omitempty"`
 }
 
 type RolloutReplicasSummary struct {
